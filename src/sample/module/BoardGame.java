@@ -101,10 +101,10 @@ public class BoardGame {
         return boardStatus;
     }
 
-    public void editBoard(int x, int y, int boxID, int xAlt, int yAlt) {
+    public void editBoard(int x, int y, String boxID, int xAlt, int yAlt) {
         for (int i = 0; i < boxes.length; i++) {
             for (int j = 0; j < boxes[i].length; j++) {
-                if (boxes[i][j].getBoxID() == boxID) {
+                if (boxes[i][j].getBoxID().equals(boxID)) {
                     BOX temp = boxes[x][y];
                     boxes[x][y] = boxes[xAlt][yAlt];
                     boxes[xAlt][yAlt] = temp;

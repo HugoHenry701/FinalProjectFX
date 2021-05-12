@@ -3,12 +3,12 @@ package sample.module;
 import java.util.UUID;
 
 public class BOX {
-    private String Color;
+    private String boxColor;
     private UUID boxID;
     private boolean boxStatus;
 
     public BOX(String c, boolean bStatus) {
-        Color = c;
+        boxColor = c;
         boxStatus = bStatus;
         boxID = UUID.randomUUID();
     }
@@ -18,11 +18,11 @@ public class BOX {
     }
 
     public String getColor() {
-        return Color;
+        return boxColor;
     }
 
     public void setColor(String c) {
-        Color = c;
+        boxColor = c;
     }
 
     public boolean getBoxStatus() {
