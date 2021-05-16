@@ -1,23 +1,51 @@
 package sample;
-
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import  sample.controller.MenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
+
+import java.io.IOException;
 
 public class Main extends Application {
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-    }
-
+    private Stage primaryStage;
 
     public static void main(String[] args) {
+
         launch(args);
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("The last passenger");
+
+        // Set the application icon
+        this.primaryStage.getIcons().add(new Image("file:resources/images/hkcc.png"));
+        this.primaryStage.setResizable(false);
+
+        showMainLayout();
+    }
+
+    public void showMainLayout() {
+        try {
+            // Load the fxml file and set into the center of the main layout
+           Parent root= FXMLLoader.load(this.getClass().getResource("/src/sample/View/board.fxml"));
+            Scene scene =new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            // Give the controller access to the main app
+            //MenuController controller = .getController();
+            //controller.setMainApp(this);
+
+        } catch (IOException e) {
+            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
+        }
     }
 }
