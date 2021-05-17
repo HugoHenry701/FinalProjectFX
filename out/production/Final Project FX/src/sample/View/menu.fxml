@@ -18,7 +18,7 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Button layoutX="191.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToScene3" prefHeight="33.0" prefWidth="102.0" text="Start Game">
+      <Button layoutX="191.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToSceneSetUp" prefHeight="33.0" prefWidth="102.0" text="Start Game">
          <effect>
             <DropShadow>
                <color>
@@ -39,7 +39,7 @@
             <Image url="@../../../resources/images/bus--v1.png" />
          </image>
       </ImageView>
-      <Button layoutX="191.0" layoutY="357.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="33.0" prefWidth="102.0" text="Qptions">
+      <Button layoutX="191.0" layoutY="357.0" mnemonicParsing="false" onAction="#switchToSceneOption" prefHeight="33.0" prefWidth="102.0" text="Qptions">
          <effect>
             <DropShadow>
                <color>

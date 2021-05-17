@@ -1,55 +1,79 @@
 package sample.controller;
 
 
-
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import  sample.Main;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.awt.*;
 import java.io.IOException;
 
 
-import java.awt.image.AffineTransformOp;
 import java.net.URL;
-import java.util.Random;
+
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
+
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 
-public class BoxAndPlayerController {
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import sample.module.Player;
 
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    private Stage stage2;
-    private Scene scene2;
-    private Parent root2;
+public class BoxAndPlayerController implements Initializable {
+    private ObservableList<Player> players ;
+    @FXML
+    private TableView<Player> playerTableView;
+    //scene
+    private SceneController sceneController = new SceneController();
 
-    public void switchToPlayer(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/src/sample/View/player.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            //playerNameCol
+            TableColumn<Player, String> playerNameCol = new TableColumn<>("playerNameCol");
+            playerNameCol.setCellValueFactory(new PropertyValueFactory<>("playerName"));
+            //playerColorCol
+            TableColumn<Player, Image> playerColorCol = new TableColumn<>("playerColorCol");
+            playerColorCol.setCellValueFactory(new PropertyValueFactory<>("playerImage"));
+
+            playerTableView = new TableView<>();
+            playerTableView.setItems(players);
+            playerTableView.getColumns().addAll(playerNameCol, playerColorCol);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void switchToScenePlayer(ActionEvent event) throws IOException {
+        sceneController.switchToScene3(event);
+    }
+
+    public void switchToSceneMenu(ActionEvent event) throws IOException {
+        sceneController.switchToScene1(event);
+    }
+
+    public void getPlayer( ArrayList<Player> playerArrayListList) {
+        for (int i = 0; i < playerArrayListList.size(); i++) {
+//            players.add(playerArrayListList.get(i));
+            players = FXCollections.observableArrayList(playerArrayListList);
+        }
     }
 
 }

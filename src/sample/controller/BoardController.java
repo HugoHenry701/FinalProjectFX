@@ -4,8 +4,7 @@ package sample.controller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import sample.module.BoardGame;
-import sample.module.ListGameBoard;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -15,15 +14,17 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import sample.module.BoardGame;
+import sample.module.ListGameBoard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
 
 public class BoardController implements Initializable{
-    private BoardGame mapGame;
+    private BoardGame boardGame;
     private boolean listCheck;
-    private ListGameBoard listGameBoard ;
+    private ListGameBoard listGameBoard;
 
     @FXML
     private ColorPicker color00;

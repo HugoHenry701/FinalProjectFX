@@ -1,74 +1,132 @@
 package sample.controller;
 
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+
+
+import javafx.geometry.Insets;
+
+import javafx.scene.control.*;
+
 import javafx.scene.image.Image;
+
+
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 
+
+import sample.middleware.ConvertData;
+import sample.module.Player;
+
+import java.io.IOException;
 import java.net.URL;
-import java.security.SecureRandom;
-import java.util.ResourceBundle;
-import java.util.regex.Pattern;
-public class PlayerController implements Initializable {
 
-    @FXML
-    private Label xem1;
-    @FXML
-    private Label xem2;
-    @FXML
-    private TextField playerID;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class PlayerController implements Initializable {
+    //middleware
+    private ConvertData convertData = new ConvertData();
+    //
+    private ArrayList<Player> players = new ArrayList<>();
+    private SceneController sceneController = new SceneController();
+    private ObservableList<Image> images = fetchImages();
+
     @FXML
     private TextField playerName;
-    @FXML
-    private Button me;
-    @FXML
-    private Button you;
-    @FXML
-            private ChoiceBox <String>color;
-    @FXML
-    private ChoiceBox <String>playerduo;
-    private String[] mau ={"Red","Green","Blue","Yellow"};
-    private String[] player ={"Player1","Player2","Player3","Player4"};
-    double id;
-    String name;
 
-    public void submitID(ActionEvent event) {
+    @FXML
+    private ComboBox<Image> color;
+    @FXML
+    private ComboBox<String> playerduo;
+    @FXML
+    private StackPane layout;
 
-        try {
-            id = Double.parseDouble(playerID.getText());
+    private String[] player = {"Player 1", "Player 2", "Player 3", "Player 4"};
 
-        } catch (NumberFormatException e) {
-            xem2.setText("enter only numbers plz");
-        } catch (Exception e) {
-            xem2.setText("error");
-        }
+    public PlayerController() throws IOException {
     }
 
-    public void submitName(ActionEvent event) {
+
+    public void checkPlayer(ActionEvent event) {
+
+    }
+
+    public void submitPlayer(ActionEvent event) {
 
         try {
-            name = (playerName.getText());
-
-
+            players.add(new Player(playerName.getText(), color.getValue(), 0, convertData.convertTurn(playerduo.getValue()), -1, -1));
+            sceneController.switchToScene2(event);
         } catch (Exception e) {
-            if (Pattern.matches("[a-zA-Z]+", name)) {
-                xem1.setText("enter alphabet only plz");
-            }
-            xem1.setText("error");
+            e.printStackTrace();
         }
 
+    }
+
+    private ComboBox<Image> createComboBox(ObservableList<Image> data) {
+        ComboBox<Image> combo = new ComboBox<>();
+        combo.getItems().addAll(data);
+        combo.setButtonCell(new ImageListCell());
+        combo.setCellFactory(listView -> new ImageListCell());
+        combo.getSelectionModel().select(0);
+        return combo;
+    }
+
+    class ImageListCell extends ListCell<Image> {
+        private final ImageView view;
+
+        ImageListCell() {
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            view = new ImageView();
+        }
+
+        @Override
+        protected void updateItem(Image item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (item == null || empty) {
+                setGraphic(null);
+            } else {
+                view.setImage(item);
+                setGraphic(view);
+            }
+        }
+
+    }
+
+    private ObservableList<Image> fetchImages() {
+        final ObservableList<Image> data = FXCollections.observableArrayList();
+        for (int i = 1; i < 5; i++) {
+
+            data.add(new Image("./resources/images/PLAYER/player" + i + ".png"));
+        }
+        return data;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        color.getItems().addAll(mau);
+        //comboBox for Color
+        color = createComboBox(images);
+        layout = new StackPane(color);
+        layout.setPadding(new Insets(20));
+        sceneController.root3.getChildren().add(layout);
+//        color.getItems().addAll(images);
+        //playerTurn
+
         playerduo.getItems().addAll(player);
 
+        //fetchData for BoxAndPlayerScene
+        BoxAndPlayerController boxAndPlayerController = new BoxAndPlayerController();
+        boxAndPlayerController.getPlayer(players);
+    }
+
+
+    public void switchToSceneBoxAndPlayer(ActionEvent event) throws IOException {
+        sceneController.switchToScene2(event);
     }
 }
 

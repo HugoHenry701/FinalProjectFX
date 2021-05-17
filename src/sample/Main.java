@@ -35,7 +35,7 @@ public class Main extends Application {
     public void showMainLayout() {
         try {
             // Load the fxml file and set into the center of the main layout
-           Parent root= FXMLLoader.load(this.getClass().getResource("/src/sample/View/board.fxml"));
+           Parent root= FXMLLoader.load(this.getClass().getResource("/src/sample/View/menu.fxml"));
             Scene scene =new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();

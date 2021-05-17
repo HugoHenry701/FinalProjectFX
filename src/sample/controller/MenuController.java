@@ -3,46 +3,37 @@ package sample.controller;
 
 import javafx.event.ActionEvent;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 import  sample.Main;
 
-import java.awt.*;
+
 import java.io.IOException;
 
 
-import java.awt.image.AffineTransformOp;
 import java.net.URL;
-import java.util.Random;
+
 import java.util.ResourceBundle;
-import javafx.animation.FadeTransition;
+
 import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
+
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 
-import javafx.scene.media.MediaPlayer;
+
 import javafx.util.Duration;
 
 
 public class MenuController implements Initializable {
     private Main mainApp;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    private Stage stage2;
-    private Scene scene2;
-    private Parent root2;
+    private SceneController sceneController = new SceneController();
     @FXML
     private ImageView bus;
+
+
 
 
     public void setMainApp(Main mainApp) {
@@ -81,19 +72,11 @@ public class MenuController implements Initializable {
      System.exit(0);
    }
 
-    public void switchToScene2(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/src/sample/View/menuS.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToSceneSetUp(ActionEvent event) throws IOException {
+        sceneController.switchToScene2(event);
     }
-    public void switchToScene3(ActionEvent event) throws IOException {
-        Parent root2 = FXMLLoader.load(getClass().getResource("/src/sample/View/BoxAndPlayer.fxml"));
-        stage2 = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene2 = new Scene(root2);
-        stage2.setScene(scene2);
-        stage2.show();
+    public void switchToSceneOption(ActionEvent event) throws IOException {
+        sceneController.switchToScene4(event);
     }
 }
 

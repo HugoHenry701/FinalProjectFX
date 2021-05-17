@@ -60,7 +60,7 @@ public class BoardGame {
             int iBox = random.nextInt(4) + 1;
             for (int i = 0; i < boxes.length; i++) {
                 for (int j = 0; j < boxes[j].length; j++) {
-                    boxes[i][j] = new BOX("box %s".formatted(iBox), false);
+                    boxes[i][j] = new BOX("box"+iBox+".png", false);
 
                 }
             }

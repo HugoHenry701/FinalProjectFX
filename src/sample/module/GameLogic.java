@@ -25,7 +25,7 @@ public class GameLogic {
 
     public boolean isWin(Player playerI) {
         boolean checkWin;
-        if (playerI.getPlayerColor() == mapGame[playerI.getPlayerX()][boardGame.getROWS() - 1].getColor()) {
+        if (playerI.getPlayerImage() == mapGame[playerI.getPlayerX()][boardGame.getROWS() - 1].getBoxImage()) {
             checkWin = true;
         } else {
             checkWin = false;
@@ -37,7 +37,7 @@ public class GameLogic {
         boolean checkMove = false;
         for (int i = 0; i < mapGame.length; i++) {
             for (int j = 0; j < mapGame[i].length; j++) {
-                if (playerI.getPlayerColor() == mapGame[i][j].getColor()) {
+                if (playerI.getPlayerImage() == mapGame[i][j].getBoxImage()) {
                     checkMove = true;
                     playerI.addPoint(10);
                 } else {

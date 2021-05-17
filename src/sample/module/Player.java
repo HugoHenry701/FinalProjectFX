@@ -1,29 +1,29 @@
 package sample.module;
 
+import javafx.scene.image.Image;
+
 import java.util.UUID;
 
 public class Player {
     private String playerName;
     private UUID playerID;
-    private String playerColor;
+    private Image playerImage;
     private int point;
     private int turn;
     private int playerX;
     private int playerY;
 
-    public Player(String name,  String colorP, int p, int t, int x, int y) {
-        playerColor = colorP;
+    public Player(String name,Image playerImageI, int p, int t, int x, int y) {
         playerID = UUID.randomUUID();
         playerName = name;
+        playerImage = playerImageI;
         point = p;
         turn = t;
         playerX = x;
         playerY = y;
     }
 
-    public Player() {
-        this("",  "", 0,0,-1,-1);
-    }
+
 
     //get
     public String getPlayerName() {
@@ -34,9 +34,9 @@ public class Player {
         return playerID.toString();
     }
 
-    public String getPlayerColor() {
-        return playerColor;
-    }
+//    public String getPlayerColor() {
+//        return playerColor;
+//    }
 
     public int getPoint() {
         return point;
@@ -46,7 +46,7 @@ public class Player {
     }
     public int getPlayerX(){return playerX;}
     public int getPlayerY(){return playerY;}
-
+    public Image getPlayerImage(){return playerImage;}
     //set
     public void setPlayerName(String name) {
         playerName = name;
@@ -56,9 +56,9 @@ public class Player {
         playerID = id;
     }
 
-    public void setPlayerColor(String colorP) {
-        playerColor = colorP;
-    }
+//    public void setPlayerColor(String colorP) {
+//        playerColor = colorP;
+//    }
     public void setPoint(int p){
         point = p;
     }
@@ -74,4 +74,5 @@ public class Player {
     public void setPlayerX (int x){playerX = x;}
     public void setPlayerY (int y){playerY = y;}
     public void movePlayer(){playerY++;}
+    public void setPlayerImage(Image playerImage1){playerImage = playerImage1;}
 }
