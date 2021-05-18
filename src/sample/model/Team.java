@@ -1,15 +1,12 @@
 package sample.model;
 
-import javafx.scene.image.Image;
+import java.util.ArrayList;
 
 public class Team {
-    private Image teamColor;
+    private ArrayList<Player>players;
 
-    public Team( Image teamColor1){
-        teamColor = teamColor1;
-    }
-    public Image getTeamColor(){return teamColor;}
-    public void setTeamColor(Image image){
-        teamColor = image;
+    public Team(){
+        players = new ArrayList<>();
+        players.add(new Player());
     }
 }

@@ -72,11 +72,11 @@ public class gamePlayController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boardGame = new BoardGame(map.getColumnCount(), map.getRowCount(),true );
-        System.out.println("The game was made.");
-        System.out.println(map.getColumnCount());//4
-        System.out.println(map.getRowCount());//5
+//        System.out.println("The game was made.");
+//        System.out.println(map.getColumnCount());//4
+//        System.out.println(map.getRowCount());//5
         initMap(boardGame.getBoard());
-        System.out.println("The map was made.");
+//        System.out.println("The map was made.");
     }
 
     public void initMap(BOX[][] mapI){
