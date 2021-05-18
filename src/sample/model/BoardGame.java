@@ -3,7 +3,7 @@ package sample.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
+
 
 public class BoardGame {
     private boolean boardStatus;
@@ -14,12 +14,16 @@ public class BoardGame {
         boardStatus = boardBool;
         boxes = new BOX[col][row];
         for (int i = 0; i < boxes.length; i++) {
-            ArrayList<Integer> iBox = new ArrayList<>();
-            iBox.add(Integer.valueOf(i));
-            Collections.shuffle(iBox);
-            for (int j = 0; j < boxes[i].length; j++) {
+            for (int k = 0; k < boxes[i].length; k++) {
+                ArrayList<Integer> iBox = new ArrayList<>();
+                for (int g = 0; g < 4; g++) {
+                    iBox.add(Integer.valueOf(g));
+                }
+                Collections.shuffle(iBox);
+                for (int j = 0; j < boxes.length; j++) {
 
-                boxes[i][j] = new BOX("box" + iBox.get(i) + ".png", false);
+                    boxes[j][k] = new BOX("box" + iBox.get(j) + ".png", false);
+                }
             }
         }
     }
