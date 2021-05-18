@@ -1,10 +1,10 @@
-package sample.controller;
+package sample.view.ControllerView;
 
 
 import javafx.event.ActionEvent;
 
 
-import  sample.Main;
+import sample.application.Main;
 
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 
-public class MenuController implements Initializable {
+public class MenuView implements Initializable {
     private Main mainApp;
     private SceneController sceneController = new SceneController();
     @FXML
@@ -72,11 +72,11 @@ public class MenuController implements Initializable {
      System.exit(0);
    }
 
-    public void switchToSceneSetUp(ActionEvent event) throws IOException {
+    public void switchToGamePlay(ActionEvent event) throws IOException {
         sceneController.switchToScene2(event);
     }
     public void switchToSceneOption(ActionEvent event) throws IOException {
-        sceneController.switchToScene4(event);
+        sceneController.switchToScene3(event);
     }
 }
 

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.MenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.ControllerView.MenuView">
    <children>
       <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,7 +18,7 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Button layoutX="191.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToSceneSetUp" prefHeight="33.0" prefWidth="102.0" text="Start Game">
+      <Button layoutX="199.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToGamePlay" prefHeight="33.0" prefWidth="102.0" text="Start Game">
          <effect>
             <DropShadow>
                <color>
@@ -26,7 +26,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button layoutX="191.0" layoutY="428.0" mnemonicParsing="false" onAction="#out" prefHeight="33.0" prefWidth="102.0" text="Exit Game">
+      <Button layoutX="199.0" layoutY="421.0" mnemonicParsing="false" onAction="#out" prefHeight="33.0" prefWidth="102.0" text="Exit Game">
          <effect>
             <DropShadow>
                <color>
@@ -39,7 +39,7 @@
             <Image url="@../../../resources/images/bus--v1.png" />
          </image>
       </ImageView>
-      <Button layoutX="191.0" layoutY="357.0" mnemonicParsing="false" onAction="#switchToSceneOption" prefHeight="33.0" prefWidth="102.0" text="Qptions">
+      <Button layoutX="199.0" layoutY="357.0" mnemonicParsing="false" onAction="#switchToSceneOption" prefHeight="33.0" prefWidth="102.0" text="Options">
          <effect>
             <DropShadow>
                <color>

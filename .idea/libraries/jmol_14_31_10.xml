@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jmol-14.31.10">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Soft/Data_reader_javafx/jmol-14.31.10.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

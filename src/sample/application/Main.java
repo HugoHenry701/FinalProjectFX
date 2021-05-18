@@ -1,8 +1,5 @@
-package sample;
+package sample.application;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import  sample.controller.MenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,7 +32,7 @@ public class Main extends Application {
     public void showMainLayout() {
         try {
             // Load the fxml file and set into the center of the main layout
-           Parent root= FXMLLoader.load(this.getClass().getResource("/src/sample/View/menu.fxml"));
+            Parent root= FXMLLoader.load(this.getClass().getResource("/sample/view/menu.fxml"));
             Scene scene =new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
