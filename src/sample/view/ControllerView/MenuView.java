@@ -8,8 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sample.application.Main;
 
@@ -38,6 +40,7 @@ public class MenuView implements Initializable {
     private Main mainApp;
 
     private boolean isHidden;
+    Font font=Font.font("castellar", 16);
     @FXML
     TextField p1name;
     @FXML
@@ -46,6 +49,15 @@ public class MenuView implements Initializable {
     TextField p3name;
     @FXML
     TextField p4name;
+    @FXML
+    Label valid1;
+    @FXML
+    Label valid2;
+    @FXML
+    Label valid3;
+    @FXML
+    Label valid4;
+
 
     @FXML
     private ImageView bus;
@@ -91,6 +103,7 @@ public class MenuView implements Initializable {
 
     }
 
+
     public void out(ActionEvent e) {
         System.exit(0);
     }
@@ -103,14 +116,34 @@ public class MenuView implements Initializable {
         return playersName;
     }
     public void switchToGamePlay(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/view/gamePlay.fxml"));
-        Parent root2 = loader.load();
-        GamePlayController gamePlayController = loader.getController();
-        gamePlayController.displayPlayerName(getPlayersName());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root2);
-        stage.setScene(scene);
-        stage.show();
+
+            if(isValidSubmit() ){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/view/gamePlay.fxml"));
+                Parent root2 = loader.load();
+                GamePlayController gamePlayController = loader.getController();
+                gamePlayController.displayPlayerName(getPlayersName());
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root2);
+                stage.setScene(scene);
+                stage.show();
+            }else if(!isValidName(p1name.getText())){
+                valid1.setText("Invalid Player Name");
+                valid1.setStyle("-fx-text-fill:red");
+                valid1.setFont(font);
+            }else if(!isValidName(p2name.getText())){
+                valid2.setText("Invalid Player Name");
+                valid2.setStyle("-fx-text-fill:red");
+                valid2.setFont(font);
+            }else if(!isValidName(p3name.getText())){
+                valid3.setText("Invalid Player Name");
+                valid3.setStyle("-fx-text-fill:red");
+                valid3.setFont(font);
+            }else if(!isValidName(p4name.getText())){
+                valid4.setText("Invalid Player Name");
+                valid4.setStyle("-fx-text-fill:red");
+                valid4.setFont(font);
+            }
+
     }
 
 
@@ -169,6 +202,20 @@ public class MenuView implements Initializable {
         }
         trans.play();
     }
+    public boolean isValidSubmit(){
 
+        boolean check;
+        if(isValidName(p1name.getText()) && isValidName(p2name.getText()) && isValidName(p3name.getText()) && isValidName(p4name.getText())){
+            check = true;
+        }
+        else {
+            check = false;
+        }
+        return check;
+    }
+    public boolean isValidName(String str){
+        String regex = "[A-Za-z\\s]+";
+        return str.matches(regex);
+    }
 }
 
