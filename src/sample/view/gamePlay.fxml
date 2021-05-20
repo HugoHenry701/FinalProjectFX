@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.ControllerView.gamePlayController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.ControllerView.GamePlayController">
    <children>
       <Pane fx:id="endGame" layoutX="14.0" layoutY="16.0" prefHeight="368.0" prefWidth="571.0" visible="false">
          <children>
@@ -58,8 +59,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="45.0" prefWidth="100.0" text="PLayer 1" />
-                  <TextField fx:id="p1name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="p1Status" prefHeight="45.0" prefWidth="100.0" text="PLayer 1" />
+                  <TextField fx:id="p1name" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="p1totalP" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label prefHeight="45.0" prefWidth="100.0" text="Player Name" GridPane.rowIndex="1" />
                   <ImageView fx:id="p1turn" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
@@ -77,8 +78,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label prefHeight="45.0" prefWidth="100.0" text="PLayer 3" />
-                  <TextField fx:id="p3name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="p3Status" prefHeight="45.0" prefWidth="100.0" text="PLayer 3" />
+                  <TextField fx:id="p3name" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="p3totalP" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label prefHeight="45.0" prefWidth="100.0" text="Player Name" GridPane.rowIndex="1" />
                   <ImageView fx:id="p3turn" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
@@ -96,8 +97,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label prefHeight="45.0" prefWidth="100.0" text="PLayer 2" />
-                  <TextField fx:id="p2name" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="p2Status" prefHeight="45.0" prefWidth="100.0" text="PLayer 2" />
+                  <TextField fx:id="p2name" editable="false" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="p2totalP" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label prefHeight="45.0" prefWidth="100.0" text="Player Name" GridPane.rowIndex="1" />
                   <ImageView fx:id="p2turn" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
@@ -115,8 +116,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label prefHeight="45.0" prefWidth="100.0" text="PLayer 4" />
-                  <TextField fx:id="p4name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="p4Status" prefHeight="45.0" prefWidth="100.0" text="PLayer 4" />
+                  <TextField fx:id="p4name" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="p4totalP" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label prefHeight="45.0" prefWidth="100.0" text="Player Name" GridPane.rowIndex="1" />
                   <ImageView fx:id="p4turn" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
@@ -136,6 +137,15 @@
               </rowConstraints>
             </GridPane>
             <Button fx:id="restartButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#switchToMenu" text="Restart Game" />
+            <Pane layoutX="104.0" layoutY="9.0" prefHeight="68.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="184.0" fitWidth="60.0" layoutX="70.0" layoutY="-58.0" pickOnBounds="true" rotate="90.0">
+                     <image>
+                        <Image url="@/resources/images/flow.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

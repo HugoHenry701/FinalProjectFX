@@ -7,10 +7,10 @@ import javafx.scene.image.Image;
 import java.util.UUID;
 
 public class Player {
-    private StringProperty playerName;
+    private String playerName;
     private UUID playerID;
     private Image playerImage;
-    private StringProperty playerColor;
+    private String playerColor;
     private int point;
     private int turn;
     private int playerX;
@@ -21,8 +21,8 @@ public class Player {
     }
     public Player(String name,String playerColorI, int p, int t, int x, int y) {
         playerID = UUID.randomUUID();
-        setPlayerName(name);
-        setPlayerColor(playerColorI) ;
+        playerName = name;
+        playerColor = playerColorI;
         playerImage = new Image("images/PLAYER/"+ getPlayerColor()+".png");
         point = p;
         turn = t;
@@ -32,9 +32,9 @@ public class Player {
 
     //get
     public String getPlayerName() {
-        return playerNameProperty().get();
+        return playerName;
     }
-    public String getPlayerColor(){return playerColorProperty().get();}
+    public String getPlayerColor(){return playerColor;}
     public String getPlayerID() {
         return playerID.toString();
     }
@@ -54,23 +54,23 @@ public class Player {
     public Image getPlayerImage(){return playerImage;}
 
     //set
-    public StringProperty playerNameProperty(){
-        if(playerName == null){
-            playerName = new SimpleStringProperty();
-        }
-        return playerName;
-    }
-    public final void setPlayerName(String name) {
-        this.playerNameProperty().set(name);
-    }
+//    public StringProperty playerNameProperty(){
+//        if(playerName == null){
+//            playerName = new SimpleStringProperty();
+//        }
+//        return playerName;
+//    }
+//    public final void setPlayerName(String name) {
+//        this.playerNameProperty().set(name);
+//    }
 
-    public StringProperty playerColorProperty(){
-        if(playerColor == null){
-            playerColor = new SimpleStringProperty();
-        }
-        return playerColor;
-    }
-    public final void setPlayerColor(String color){this.playerColorProperty().set(color);}
+//    public StringProperty playerColorProperty(){
+//        if(playerColor == null){
+//            playerColor = new SimpleStringProperty();
+//        }
+//        return playerColor;
+//    }
+//    public final void setPlayerColor(String color){this.playerColorProperty().set(color);}
 
     public void setPlayerID(UUID id) {
         playerID = id;
@@ -95,10 +95,8 @@ public class Player {
     public void setPlayerY (int y){playerY = y;}
     public void movePlayer(){playerY++;}
     public void setPlayerImage(Image playerImage1){playerImage = playerImage1;}
-
-
-    @Override
-    public String toString(){
-        return getPlayerName();
+    public void setPlayerName(String name){
+        playerName = name;
     }
+
 }

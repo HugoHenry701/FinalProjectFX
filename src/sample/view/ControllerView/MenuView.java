@@ -4,6 +4,13 @@ package sample.view.ControllerView;
 import javafx.event.ActionEvent;
 
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import sample.application.Main;
 
 
@@ -29,11 +36,27 @@ import javafx.util.Duration;
 
 public class MenuView implements Initializable {
     private Main mainApp;
-    private SceneController sceneController = new SceneController();
+
+    private boolean isHidden;
+    @FXML
+    TextField p1name;
+    @FXML
+    TextField p2name;
+    @FXML
+    TextField p3name;
+    @FXML
+    TextField p4name;
+
     @FXML
     private ImageView bus;
-
-
+    @FXML
+    private AnchorPane subSceneHelp;
+    @FXML
+    private AnchorPane subScenePlay;
+    @FXML
+    private AnchorPane subSceneCredit;
+    @FXML
+    private AnchorPane subSceneSCore;
 
 
     public void setMainApp(Main mainApp) {
@@ -42,41 +65,110 @@ public class MenuView implements Initializable {
     }
 
 
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-            TranslateTransition translate=new TranslateTransition();
-            translate.setNode(bus);
-            translate.setCycleCount(TranslateTransition.INDEFINITE);
-            translate.setToX(500);
-            translate.setToY(500);
-            translate.setFromX(25);
-            translate.setFromY(-100);
-            translate.setToX(50);
-            translate.setToZ(0);
-            translate.setDuration(Duration.seconds(3));
-            translate.setAutoReverse(true);
-            translate.play();
-            ScaleTransition scale = new ScaleTransition();
-            scale.setNode(bus);
-            scale.setDuration(Duration.millis(1000));
-            scale.setCycleCount(TranslateTransition.INDEFINITE);
-            scale.setInterpolator(Interpolator.LINEAR);
-            scale.setByX(1.5);
-            scale.setByY(1.5);
+        TranslateTransition translate = new TranslateTransition();
+        translate.setNode(bus);
+        translate.setCycleCount(TranslateTransition.INDEFINITE);
+        translate.setToX(500);
+        translate.setToY(500);
+        translate.setFromX(25);
+        translate.setFromY(-100);
+        translate.setToX(50);
+        translate.setToZ(0);
+        translate.setDuration(Duration.seconds(3));
+        translate.setAutoReverse(true);
+        translate.play();
+        ScaleTransition scale = new ScaleTransition();
+        scale.setNode(bus);
+        scale.setDuration(Duration.millis(1000));
+        scale.setCycleCount(TranslateTransition.INDEFINITE);
+        scale.setInterpolator(Interpolator.LINEAR);
+        scale.setByX(1.5);
+        scale.setByY(1.5);
+        scale.play();
 
-            scale.play();
     }
-   public void out(ActionEvent e){
-     System.exit(0);
-   }
 
+    public void out(ActionEvent e) {
+        System.exit(0);
+    }
+    public String[] getPlayersName(){
+        String[] playersName = new String[4];
+        playersName[0] = p1name.getText();
+        playersName[1] = p2name.getText();
+        playersName[2] = p3name.getText();
+        playersName[3] = p4name.getText();
+        return playersName;
+    }
     public void switchToGamePlay(ActionEvent event) throws IOException {
-        sceneController.switchToScene2(event);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/view/gamePlay.fxml"));
+        Parent root2 = loader.load();
+        GamePlayController gamePlayController = loader.getController();
+        gamePlayController.displayPlayerName(getPlayersName());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root2);
+        stage.setScene(scene);
+        stage.show();
     }
-    public void switchToSceneOption(ActionEvent event) throws IOException {
-        sceneController.switchToScene3(event);
+
+
+    public void moveSubSceneHelp() {
+        TranslateTransition trans = new TranslateTransition();
+        trans.setDuration(Duration.seconds(0.3));
+        trans.setNode(subSceneHelp);
+        if (isHidden) {
+            trans.setToX(675);
+            isHidden = false;
+        } else {
+            trans.setToX(0);
+            isHidden = true;
+        }
+        trans.play();
     }
+
+    public void moveSubScenePlay() {
+        TranslateTransition trans = new TranslateTransition();
+        trans.setDuration(Duration.seconds(0.3));
+        trans.setNode(subScenePlay);
+        if (isHidden) {
+            trans.setToX(675);
+            isHidden = false;
+        } else {
+            trans.setToX(0);
+            isHidden = true;
+        }
+        trans.play();
+    }
+
+    public void moveSubSceneCredit() {
+        TranslateTransition trans = new TranslateTransition();
+        trans.setDuration(Duration.seconds(0.3));
+        trans.setNode(subSceneCredit);
+        if (isHidden) {
+            trans.setToX(675);
+            isHidden = false;
+        } else {
+            trans.setToX(0);
+            isHidden = true;
+        }
+        trans.play();
+    }
+
+    public void moveSubSceneScore() {
+        TranslateTransition trans = new TranslateTransition();
+        trans.setDuration(Duration.seconds(0.3));
+        trans.setNode(subSceneSCore);
+        if (isHidden) {
+            trans.setToX(675);
+            isHidden = false;
+        } else {
+            trans.setToX(0);
+            isHidden = true;
+        }
+        trans.play();
+    }
+
 }
 

@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.ControllerView.MenuView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.ControllerView.MenuView">
    <children>
-      <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
          <image>
-            <Image url="@../../../resources/images/duong.png" />
+            <Image url="@/resources/images/duong.png" />
          </image>
          <viewport>
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Button layoutX="199.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToGamePlay" prefHeight="33.0" prefWidth="102.0" text="Start Game">
+      <Button layoutX="74.0" layoutY="64.0" mnemonicParsing="false" onAction="#moveSubScenePlay" prefHeight="33.0" prefWidth="102.0" style="-fx-background-color: yellow;" text="PLAY">
          <effect>
             <DropShadow>
                <color>
@@ -26,7 +34,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button layoutX="199.0" layoutY="421.0" mnemonicParsing="false" onAction="#out" prefHeight="33.0" prefWidth="102.0" text="Exit Game">
+      <Button layoutX="74.0" layoutY="311.0" mnemonicParsing="false" onAction="#out" prefHeight="33.0" prefWidth="102.0" style="-fx-background-color: yellow;" text="EXIT">
          <effect>
             <DropShadow>
                <color>
@@ -36,10 +44,10 @@
          </effect></Button>
       <ImageView fx:id="bus" fitHeight="88.0" fitWidth="102.0" layoutX="206.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../resources/images/bus--v1.png" />
+            <Image url="@/resources/images/bus--v1.png" />
          </image>
       </ImageView>
-      <Button layoutX="199.0" layoutY="357.0" mnemonicParsing="false" onAction="#switchToSceneOption" prefHeight="33.0" prefWidth="102.0" text="Options">
+      <Button layoutX="74.0" layoutY="189.0" mnemonicParsing="false" onAction="#moveSubSceneHelp" prefHeight="33.0" prefWidth="102.0" style="-fx-background-color: yellow;" text="HELP">
          <effect>
             <DropShadow>
                <color>
@@ -47,5 +55,108 @@
                </color>
             </DropShadow>
          </effect></Button>
+      <Button layoutX="74.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveSubSceneCredit" prefHeight="33.0" prefWidth="102.0" style="-fx-background-color: yellow;" text="CREDITS">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.9200000166893005" green="0.018400000408291817" blue="0.018400000408291817" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button layoutX="74.0" layoutY="128.0" mnemonicParsing="false" onAction="#moveSubSceneScore" prefHeight="33.0" prefWidth="102.0" style="-fx-background-color: yellow;" text="SCORES">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.9200000166893005" green="0.018400000408291817" blue="0.018400000408291817" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Label layoutX="286.0" prefHeight="51.0" prefWidth="314.0" text="THE LAST PASSENGER" textFill="#00b2ff">
+         <font>
+            <Font name="Showcard Gothic" size="30.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="subSceneHelp" layoutX="209.0" layoutY="76.0" prefHeight="280.0" prefWidth="378.0" translateX="675.0">
+         <children>
+            <TextArea editable="false" layoutY="40.0" prefHeight="200.0" prefWidth="378.0" style="-fx-background-color: yellow;" text="=&gt;GAME RULES:&#10;+ WIN CONDITION: &#10;&#9;$You need to&#10;&#9; choose the box which have your color.&#10;&#9;$You need to finish all the stage and &#10;&#9;   have the hightest score.&#10;+ If you choose wrong, you will comeback to the Stage 1.&#10;+ Wait for the green light to playing your turn." wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Bookman Old Style Bold" size="15.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="subSceneSCore" layoutX="206.0" layoutY="66.0" prefHeight="280.0" prefWidth="378.0" translateX="675.0">
+         <children>
+            <TextArea layoutY="40.0" prefHeight="200.0" prefWidth="378.0" text="NULL ##401&#10;">
+               <font>
+                  <Font size="53.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="subSceneCredit" layoutX="206.0" layoutY="66.0" prefHeight="280.0" prefWidth="378.0" translateX="675.0">
+         <children>
+            <TextArea layoutY="40.0" prefHeight="200.0" prefWidth="378.0" style="-fx-background-color: yellow;" text="ABOUT US:&#10;NGUYEN QUANG HIEU - 1570401&#10;NGUYEN DOAN DUY - 1570581&#10;LUONG VAN ANH - 1575330&#10;TRAN BAO ANH - 1570595">
+               <font>
+                  <Font name="Mistral" size="22.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="subScenePlay" layoutX="199.0" layoutY="66.0" prefHeight="280.0" prefWidth="378.0" translateX="675.0">
+         <children>
+            <ImageView fitHeight="280.0" fitWidth="378.0" pickOnBounds="true">
+               <image>
+                  <Image url="@/resources/images/dialog.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="28.0" layoutY="14.0" prefHeight="28.0" prefWidth="243.0" text="Please insert your name:">
+               <font>
+                  <Font name="Jokerman" size="19.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="50.0" layoutY="50.0" prefHeight="167.0" prefWidth="243.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.3333740234375" minWidth="10.0" prefWidth="67.3333740234375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.6666259765625" minWidth="10.0" prefWidth="174.6666259765625" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="p1name" prefHeight="39.0" prefWidth="322.0" GridPane.columnIndex="1" />
+                  <Label prefHeight="17.0" prefWidth="96.0" text="Player 2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label prefHeight="17.0" prefWidth="97.0" text="Player 1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label prefHeight="17.0" prefWidth="98.0" text="Player 3" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label prefHeight="17.0" prefWidth="97.0" text="Player 4" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <TextField fx:id="p2name" prefHeight="39.0" prefWidth="322.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="p3name" prefHeight="39.0" prefWidth="322.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="p4name" prefHeight="39.0" prefWidth="322.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <Button layoutX="292.0" layoutY="241.0" mnemonicParsing="false" onAction="#switchToGamePlay" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: yellow; -fx-border-color: black;" text="Start" />
+            
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
