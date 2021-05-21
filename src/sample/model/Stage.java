@@ -2,11 +2,11 @@ package sample.model;
 
 import javafx.scene.image.Image;
 
-public class Step {
+public class Stage {
     private int step;
     private Image arrow;
 
-    public Step(int step1){
+    public Stage(int step1){
         step = step1;
         arrow = new Image("images/coolArrow.png");
     }

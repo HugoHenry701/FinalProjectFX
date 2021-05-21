@@ -14,29 +14,39 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import javafx.stage.Stage;
-import sample.middleware.ConvertData;
-import sample.model.BOX;
-import sample.model.BoardGame;
-import sample.model.Player;
-import sample.model.Team;
 
+import sample.model.*;
+
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 
 import java.util.ResourceBundle;
 
 public class GamePlayController implements Initializable {
-    private ConvertData convertData = new ConvertData();
+
 
     //data Field
     BoardGame boardGame;
     Team team;
+    GameLogic gameLogic;
     //FXML connect
     @FXML
     Pane playGame;
     @FXML
     Pane endGame;
     //panePlayGame
+    @FXML
+    Label stage1;
+    @FXML
+    Label stage2;
+    @FXML
+    Label stage3;
+    @FXML
+    Label stage4;
+    @FXML
+    Label stage5;
+
     @FXML
     Label p1Status;
     @FXML
@@ -93,18 +103,18 @@ public class GamePlayController implements Initializable {
     @FXML
     TableColumn<Player, Integer> totalPointCol;
 
+
+
     //Override
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boardGame = new BoardGame(map.getColumnCount(), map.getRowCount(), true);
-//        System.out.println("The game was made.");
-//        System.out.println(map.getColumnCount());//4
-//        System.out.println(map.getRowCount());//5
         initMap(boardGame.getBoard());
-//        System.out.println("The map was made.");
         team = new Team(map.getColumnCount());
         updatePlayersName();
         initPlayers(team.getPlayers());
+        gameLogic = new GameLogic(boardGame,team.getPlayers(),0,0);
+        startGame();
     }
 
 
@@ -124,9 +134,11 @@ public class GamePlayController implements Initializable {
                     box.setFitHeight(45);
                     box.setFitWidth(45);
                     box.setPreserveRatio(false);
+                    box.setVisible(false);
                     map.add(box, i, j, 1, 1);
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,11 +162,6 @@ public class GamePlayController implements Initializable {
         }
     }
 
-//    public void updatePlayerName(Player[] players1) {
-//        for (int i = 0; i < players1.length; i++) {
-//            players1[i].setPlayerName(playersName[i].getText());
-//        }
-//    }
     public void updatePlayersName(){
         team.getPlayers()[0].setPlayerName(p1name.getText());
         team.getPlayers()[1].setPlayerName(p2name.getText());
@@ -162,6 +169,21 @@ public class GamePlayController implements Initializable {
         team.getPlayers()[3].setPlayerName(p4name.getText());
     }
 
+    private void mouseEntered(MouseEvent e){
+        Node source = (Node)e.getSource();
+        Integer indexCol = GridPane.getColumnIndex(source);
+        Integer indexRow = GridPane.getRowIndex(source);
+        System.out.printf("Mouse entered cell [%d, %d]%n", indexCol.intValue(), indexRow.intValue());
+    }
+    public void startGame(){
+        //setup
+        stage2.setVisible(false);
+        stage3.setVisible(false);
+        stage4.setVisible(false);
+        stage5.setVisible(false);
+
+
+    }
     public void switchToMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/view/menu.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

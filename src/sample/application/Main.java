@@ -20,10 +20,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("The last passenger");
+        this.primaryStage.setTitle("THE LAST PASSENGER");
 
         // Set the application icon
-        this.primaryStage.getIcons().add(new Image("file:resources/images/hkcc.png"));
+        this.primaryStage.getIcons().add(new Image("/hkcc_icons/hkcc_tKo_2.ico"));
         this.primaryStage.setResizable(false);
 
         showMainLayout();
