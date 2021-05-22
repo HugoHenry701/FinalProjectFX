@@ -1,6 +1,8 @@
 package sample.view.ControllerView;
 
 import javafx.event.ActionEvent;
+
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.image.ImageView;
+
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -17,13 +21,14 @@ import javafx.stage.Stage;
 
 import sample.model.*;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 
 import java.util.ResourceBundle;
 
 public class GamePlayController implements Initializable {
+
+    //parameter
 
 
     //data Field
@@ -36,6 +41,8 @@ public class GamePlayController implements Initializable {
     @FXML
     Pane endGame;
     //panePlayGame
+    @FXML
+    Label wrongStatus;
     @FXML
     Label stage1;
     @FXML
@@ -59,6 +66,15 @@ public class GamePlayController implements Initializable {
     GridPane map;
     @FXML
     GridPane turnPane;
+    @FXML
+    GridPane p1Pane;
+    @FXML
+    GridPane p2Pane;
+    @FXML
+    GridPane p3Pane;
+    @FXML
+    GridPane p4Pane;
+
     @FXML
     ImageView p1turn;
     @FXML
@@ -104,7 +120,6 @@ public class GamePlayController implements Initializable {
     TableColumn<Player, Integer> totalPointCol;
 
 
-
     //Override
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -113,12 +128,14 @@ public class GamePlayController implements Initializable {
         team = new Team(map.getColumnCount());
         updatePlayersName();
         initPlayers(team.getPlayers());
-        gameLogic = new GameLogic(boardGame,team.getPlayers(),0,0);
+        gameLogic = new GameLogic(boardGame, team.getPlayers(), 1, 1);
+
         startGame();
+
     }
 
 
-    public void displayPlayerName(String[] playersName){
+    public void displayPlayerName(String[] playersName) {
         p1name.setText(playersName[0]);
         p2name.setText(playersName[1]);
         p3name.setText(playersName[2]);
@@ -130,12 +147,8 @@ public class GamePlayController implements Initializable {
 
             for (int i = 0; i < mapI.length; i++) {
                 for (int j = 0; j < mapI[i].length; j++) {
-                    ImageView box = new ImageView(mapI[i][j].getBoxImage());
-                    box.setFitHeight(45);
-                    box.setFitWidth(45);
-                    box.setPreserveRatio(false);
-                    box.setVisible(false);
-                    map.add(box, i, j, 1, 1);
+                    map.add(mapI[i][j],i,j,1,1);
+                    mapI[i][j].getChildren().add(mapI[i][j].getBoxImage());
                 }
             }
 
@@ -162,28 +175,43 @@ public class GamePlayController implements Initializable {
         }
     }
 
-    public void updatePlayersName(){
+    public void updatePlayersName() {
         team.getPlayers()[0].setPlayerName(p1name.getText());
         team.getPlayers()[1].setPlayerName(p2name.getText());
         team.getPlayers()[2].setPlayerName(p3name.getText());
         team.getPlayers()[3].setPlayerName(p4name.getText());
     }
 
-    private void mouseEntered(MouseEvent e){
-        Node source = (Node)e.getSource();
-        Integer indexCol = GridPane.getColumnIndex(source);
-        Integer indexRow = GridPane.getRowIndex(source);
-        System.out.printf("Mouse entered cell [%d, %d]%n", indexCol.intValue(), indexRow.intValue());
-    }
-    public void startGame(){
-        //setup
-        stage2.setVisible(false);
-        stage3.setVisible(false);
-        stage4.setVisible(false);
-        stage5.setVisible(false);
 
+    public void startGame() {
+        //stage
+        switch (gameLogic.getCurrentStage()){
+            case 1: stage1.setVisible(true);
+                for (int i = 0; i < map.getColumnCount(); i++) {
+                    boardGame.getBoard()[i][gameLogic.getCurrentStage()].getBoxImage().setDisable(false);
+                }
+                break;
+            case 2: stage2.setVisible(true);
+                break;
+            case 3: stage3.setVisible(true);
+                break;
+            case 4: stage4.setVisible(true);
+                break;
+            case 5: stage5.setVisible(true);
+                break;
+        }
+        //turn
+        switch (gameLogic.getCurrentIndex()){
+            case 1: p1Pane.setDisable(false);break;
+            case 2: p2Pane.setDisable(false);break;
+            case 3: p3Pane.setDisable(false);break;
+            case 4: p4Pane.setDisable(false);break;
+        }
+
+        //
 
     }
+
     public void switchToMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/view/menu.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

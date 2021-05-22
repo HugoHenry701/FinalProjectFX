@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -34,7 +35,7 @@
       </Pane>
       <Pane fx:id="playGame" layoutX="-4.0" layoutY="-5.0" prefHeight="409.0" prefWidth="608.0">
          <children>
-            <GridPane fx:id="map" gridLinesVisible="true" layoutX="105.0" layoutY="83.0" onTouchPressed="#mouseEntered" prefHeight="243.0" prefWidth="197.0" style="-fx-background-color: grey;">
+            <GridPane fx:id="map" gridLinesVisible="true" layoutX="105.0" layoutY="83.0" prefHeight="243.0" prefWidth="197.0" style="-fx-background-color: grey;">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.3333740234375" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.3333740234375" minWidth="10.0" prefWidth="100.0" />
@@ -49,7 +50,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane layoutX="403.0" layoutY="24.0" prefHeight="90.0" prefWidth="191.0" style="-fx-border-color: black; -fx-background-color: #7FFF00;">
+            <GridPane fx:id="p1Pane" disable="true" layoutX="403.0" layoutY="24.0" prefHeight="90.0" prefWidth="191.0" style="-fx-border-color: black;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.33331298828125" minWidth="10.0" prefWidth="69.3333231608073" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="119.33334350585938" />
@@ -67,8 +68,11 @@
                   <ImageView fx:id="p1turn" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
                   <Label prefHeight="45.0" prefWidth="100.0" text="Point" GridPane.rowIndex="2" />
                </children>
+               <effect>
+                  <Blend />
+               </effect>
             </GridPane>
-            <GridPane layoutX="403.0" layoutY="205.0" prefHeight="90.0" prefWidth="191.0" style="-fx-border-color: black;">
+            <GridPane fx:id="p3Pane" disable="true" layoutX="403.0" layoutY="205.0" prefHeight="90.0" prefWidth="191.0" style="-fx-border-color: black;">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.33331298828125" minWidth="10.0" prefWidth="69.66666666666667" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.33334350585936" minWidth="10.0" prefWidth="119.0" />
@@ -86,8 +90,11 @@
                   <ImageView fx:id="p3turn" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
                   <Label prefHeight="45.0" prefWidth="100.0" text="Point" GridPane.rowIndex="2" />
                </children>
+               <effect>
+                  <Blend />
+               </effect>
             </GridPane>
-            <GridPane layoutX="403.0" layoutY="115.0" prefHeight="90.0" prefWidth="191.0" style="-fx-border-color: black;">
+            <GridPane fx:id="p2Pane" disable="true" layoutX="403.0" layoutY="115.0" prefHeight="90.0" prefWidth="191.0" style="-fx-border-color: black;">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.33331298828125" minWidth="10.0" prefWidth="71.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.33333333333333" minWidth="10.0" prefWidth="118.33333333333333" />
@@ -105,8 +112,11 @@
                   <ImageView fx:id="p2turn" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
                   <Label prefHeight="45.0" prefWidth="100.0" text="Point" GridPane.rowIndex="2" />
                </children>
+               <effect>
+                  <Blend />
+               </effect>
             </GridPane>
-            <GridPane layoutX="403.0" layoutY="295.0" prefHeight="90.0" prefWidth="191.0" style="-fx-border-color: black;">
+            <GridPane fx:id="p4Pane" disable="true" layoutX="403.0" layoutY="295.0" prefHeight="90.0" prefWidth="191.0" style="-fx-border-color: black;">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.33331298828125" minWidth="10.0" prefWidth="70.33331298828125" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.00002034505208" minWidth="10.0" prefWidth="119.00002034505208" />
@@ -124,6 +134,9 @@
                   <ImageView fx:id="p4turn" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
                   <Label prefHeight="45.0" prefWidth="100.0" text="Point" GridPane.rowIndex="2" />
                </children>
+               <effect>
+                  <Blend />
+               </effect>
             </GridPane>
             <Button fx:id="restartButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#switchToMenu" text="Restart Game" />
             <Pane layoutX="104.0" layoutY="9.0" prefHeight="68.0" prefWidth="200.0">
@@ -147,33 +160,38 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="stage1" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 1" textFill="#1609c7">
+                  <Label fx:id="stage1" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 1" textFill="#1609c7" visible="false">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="stage2" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 2" textFill="#1609c7" GridPane.rowIndex="1">
+                  <Label fx:id="stage2" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 2" textFill="#1609c7" visible="false" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="stage3" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 3" textFill="#1609c7" GridPane.rowIndex="2">
+                  <Label fx:id="stage3" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 3" textFill="#1609c7" visible="false" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="stage4" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 4" textFill="#1609c7" GridPane.rowIndex="3">
+                  <Label fx:id="stage4" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 4" textFill="#1609c7" visible="false" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="stage5" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 5" textFill="#1609c7" GridPane.rowIndex="4">
+                  <Label fx:id="stage5" prefHeight="40.0" prefWidth="53.0" style="-fx-border-color: blue;" text="Stage 5" textFill="#1609c7" visible="false" GridPane.rowIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                </children>
             </GridPane>
+            <Label fx:id="wrongStatus" alignment="CENTER" layoutX="106.0" layoutY="350.0" prefHeight="29.0" prefWidth="197.0" text="WRONG" textFill="RED" visible="false">
+               <font>
+                  <Font name=".VnBahamasBH Bold" size="30.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

@@ -16,9 +16,9 @@ public class GameLogic {
         currentStage = currentStageI;
     }
 
-    public boolean isValidMove(int playerChoice) {
+    public boolean isValidMove(int rowIndex, int colIndex) {
         boolean valid;
-        if (currentPlayer.getPlayerImage() == boardGame.getBoard()[currentStage][playerChoice].getBoxImage()) {
+        if (currentPlayer.getPlayerImage() == boardGame.getBoard()[colIndex][rowIndex].getBox()) {
             currentPlayer.addPoint(30);
             currentStage++;
             valid = true;
@@ -32,7 +32,7 @@ public class GameLogic {
 
     public boolean isWin(int playerChoice) {
         boolean winCheck;
-        if ((currentStage == 4) && (currentPlayer.getPlayerImage() == boardGame.getBoard()[currentStage][playerChoice].getBoxImage())) {
+        if ((currentStage == 4) && (currentPlayer.getPlayerImage() == boardGame.getBoard()[currentStage][playerChoice].getBox())) {
             currentPlayer.addPoint(100);
             winCheck = true;
         } else {
