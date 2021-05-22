@@ -192,6 +192,8 @@
                   <Font name=".VnBahamasBH Bold" size="30.0" />
                </font>
             </Label>
+            <Button fx:id="nextStageBtn" layoutX="15.0" layoutY="43.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Next Stage" />
+            <Button fx:id="nextPlayerBtn" layoutX="19.0" layoutY="367.0" mnemonicParsing="false" text="Next Player" />
          </children>
       </Pane>
    </children>

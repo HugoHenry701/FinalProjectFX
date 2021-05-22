@@ -41,6 +41,10 @@ public class GamePlayController implements Initializable {
     Pane endGame;
     //panePlayGame
     @FXML
+    Button nextStageBtn;
+    @FXML
+    Button nextPlayerBtn;
+    @FXML
     Label wrongStatus;
     @FXML
     Label stage1;
@@ -124,14 +128,40 @@ public class GamePlayController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boardGame = new BoardGame(map.getColumnCount(), map.getRowCount(), true);
         team = new Team(map.getColumnCount());
+        gameLogic = new GameLogic(boardGame, team.getPlayers(), 1, 1);
         updatePlayersName(team);
-        initPlayers(team.getPlayers());
-        gameLogic = new GameLogic(boardGame,team.getPlayers(),1,1);
-        initMap(boardGame.getBoard(),gameLogic);
-        startGame(gameLogic);
-        updatePlayerData(team, gameLogic);
-    }
+//        if(!gameLogic.isWin()) {
+//            if (gameLogic.isValidMove()) {
+////                gameLogic.nextStage();
+////                gameLogic.addPoint(20);
+//                updateViews();
+//            } else {
+////                gameLogic.nextPlayer();
+////                gameLogic.setCurrentStage(1);
+//                updateViews();
+//            }
+//        }
+//        else{
+//            winnerView();
+//        }
+        updateViews();
+        nextStageBtn.setOnAction(event -> nextStage());
+        nextPlayerBtn.setOnAction(event -> nextPlayer());
+//            updatePlayerData(team, gameLogic);
 
+    }
+    public void updateViews(){
+        initPlayers(team.getPlayers());
+        initMap(boardGame.getBoard(), gameLogic);
+        startGame(gameLogic);
+    }
+    public void winnerView(){
+        playGame.setVisible(false);
+        endGame.setVisible(true);
+    }
+    public void resetView(){
+
+    }
 
     public void displayPlayerName(String[] playersName) {
         p1name.setText(playersName[0]);
@@ -145,8 +175,8 @@ public class GamePlayController implements Initializable {
 
             for (int i = 0; i < mapI.length; i++) {
 
-                    map.add(mapI[i][gameLogic.getCurrentStage()-1], i, gameLogic.getCurrentStage()-1, 1, 1);
-                    mapI[i][gameLogic.getCurrentStage()-1].getChildren().add(mapI[i][gameLogic.getCurrentStage()-1].getBoxImage());
+                map.add(mapI[i][gameLogic.getCurrentStage() - 1], i, gameLogic.getCurrentStage() - 1, 1, 1);
+                mapI[i][gameLogic.getCurrentStage() - 1].getChildren().add(mapI[i][gameLogic.getCurrentStage() - 1].getBoxImage());
 
             }
 
@@ -181,44 +211,59 @@ public class GamePlayController implements Initializable {
     }
 
 
-    public void startGame( GameLogic gameLogicI) {
+    public void startGame(GameLogic gameLogicI) {
         //stage
         switch (gameLogicI.getCurrentStage()) {
             case 1:
                 stage1.setVisible(true);
-
+                stage5.setVisible(false);
                 break;
             case 2:
                 stage2.setVisible(true);
-
+                stage1.setVisible(false);
                 break;
             case 3:
                 stage3.setVisible(true);
+                stage2.setVisible(false);
                 break;
             case 4:
                 stage4.setVisible(true);
+                stage3.setVisible(false);
                 break;
             case 5:
                 stage5.setVisible(true);
+                stage4.setVisible(false);
                 break;
         }
         //turn
         switch (gameLogic.getCurrentIndex()) {
             case 1:
                 p1Pane.setDisable(false);
+                p4Pane.setDisable(true);
                 break;
             case 2:
                 p2Pane.setDisable(false);
+                p1Pane.setDisable(true);
                 break;
             case 3:
                 p3Pane.setDisable(false);
+                p2Pane.setDisable(true);
                 break;
             case 4:
                 p4Pane.setDisable(false);
+                p3Pane.setDisable(true);
                 break;
         }
     }
 
+    public void nextStage() {
+        gameLogic.nextStage();
+        updateViews();
+    }
+    public void nextPlayer(){
+        gameLogic.nextPlayer();
+        updateViews();
+    }
     public void updatePlayerData(Team teamI, GameLogic gameLogicI) {
         teamI.getPlayers()[gameLogicI.getCurrentIndex()] = gameLogic.getCurrentPlayer();
     }
