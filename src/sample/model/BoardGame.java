@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class BoardGame {
+public class BoardGame  {
     private boolean boardStatus;
     private BOX[][] boxes;
+    private int rowIndex;
+    private int colIndex;
 
 
     public BoardGame(int col, int row, boolean boardBool) {
@@ -21,8 +23,18 @@ public class BoardGame {
                 }
                 Collections.shuffle(iBox);
                 for (int j = 0; j < boxes.length; j++) {
-
-                    boxes[j][k] = new BOX("box" + iBox.get(j) + ".png", false);
+                        boxes[j][k] = new BOX("box" + iBox.get(j) + ".png", true);
+                }
+            }
+        }
+        getCurrentBox();
+    }
+    public void getCurrentBox(){
+        for (int i = 0; i < boxes.length ; i++) {
+            for (int j = 0; j < boxes[i].length ; j++) {
+                if((boxes[i][j].getColIndex() != null)&&(boxes[i][j].getRowIndex() != null)){
+                    rowIndex = boxes[i][j].getRowIndex();
+                    colIndex = boxes[i][j].getColIndex();
                 }
             }
         }
@@ -30,13 +42,13 @@ public class BoardGame {
 
 
 
-//    public int getCOLS() {
-//        return COLS;
-//    }
+    public int getColIndex() {
+        return colIndex;
+    }
 
-//    public int getROWS() {
-//        return ROWS;
-//    }
+    public int getRowIndex() {
+        return rowIndex;
+    }
 
 //    public String getBoardName() {
 //        return boardName;

@@ -16,15 +16,15 @@ public class GameLogic {
         currentStage = currentStageI;
     }
 
-    public boolean isValidMove(int rowIndex, int colIndex) {
+    public boolean isValidMove() {
         boolean valid;
-        if (currentPlayer.getPlayerImage() == boardGame.getBoard()[colIndex][rowIndex].getBox()) {
+        if (currentPlayer.getPlayerImage() == boardGame.getBoard()[boardGame.getColIndex()][boardGame.getRowIndex()].getBox()) {
             currentPlayer.addPoint(30);
             currentStage++;
             valid = true;
         } else {
             currentIndex++;
-            currentStage = 0;
+            currentStage = 1;
             valid = false;
         }
         return valid;
@@ -50,4 +50,5 @@ public class GameLogic {
     public int getCurrentStage(){
         return currentStage;
     }
+
 }

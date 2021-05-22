@@ -28,13 +28,12 @@ import java.util.ResourceBundle;
 
 public class GamePlayController implements Initializable {
 
-    //parameter
-
-
+    //GameLogic
+    GameLogic gameLogic;
     //data Field
     BoardGame boardGame;
     Team team;
-    GameLogic gameLogic;
+
     //FXML connect
     @FXML
     Pane playGame;
@@ -124,14 +123,13 @@ public class GamePlayController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boardGame = new BoardGame(map.getColumnCount(), map.getRowCount(), true);
-        initMap(boardGame.getBoard());
         team = new Team(map.getColumnCount());
-        updatePlayersName();
+        updatePlayersName(team);
         initPlayers(team.getPlayers());
-        gameLogic = new GameLogic(boardGame, team.getPlayers(), 1, 1);
-
-        startGame();
-
+        gameLogic = new GameLogic(boardGame,team.getPlayers(),1,1);
+        initMap(boardGame.getBoard(),gameLogic);
+        startGame(gameLogic);
+        updatePlayerData(team, gameLogic);
     }
 
 
@@ -142,14 +140,14 @@ public class GamePlayController implements Initializable {
         p4name.setText(playersName[3]);
     }
 
-    public void initMap(BOX[][] mapI) {
+    public void initMap(BOX[][] mapI, GameLogic gameLogic) {
         try {
 
             for (int i = 0; i < mapI.length; i++) {
-                for (int j = 0; j < mapI[i].length; j++) {
-                    map.add(mapI[i][j],i,j,1,1);
-                    mapI[i][j].getChildren().add(mapI[i][j].getBoxImage());
-                }
+
+                    map.add(mapI[i][gameLogic.getCurrentStage()-1], i, gameLogic.getCurrentStage()-1, 1, 1);
+                    mapI[i][gameLogic.getCurrentStage()-1].getChildren().add(mapI[i][gameLogic.getCurrentStage()-1].getBoxImage());
+
             }
 
         } catch (Exception e) {
@@ -175,41 +173,54 @@ public class GamePlayController implements Initializable {
         }
     }
 
-    public void updatePlayersName() {
-        team.getPlayers()[0].setPlayerName(p1name.getText());
-        team.getPlayers()[1].setPlayerName(p2name.getText());
-        team.getPlayers()[2].setPlayerName(p3name.getText());
-        team.getPlayers()[3].setPlayerName(p4name.getText());
+    public void updatePlayersName(Team teamI) {
+        teamI.getPlayers()[0].setPlayerName(p1name.getText());
+        teamI.getPlayers()[1].setPlayerName(p2name.getText());
+        teamI.getPlayers()[2].setPlayerName(p3name.getText());
+        teamI.getPlayers()[3].setPlayerName(p4name.getText());
     }
 
 
-    public void startGame() {
+    public void startGame( GameLogic gameLogicI) {
         //stage
-        switch (gameLogic.getCurrentStage()){
-            case 1: stage1.setVisible(true);
-                for (int i = 0; i < map.getColumnCount(); i++) {
-                    boardGame.getBoard()[i][gameLogic.getCurrentStage()].getBoxImage().setDisable(false);
-                }
+        switch (gameLogicI.getCurrentStage()) {
+            case 1:
+                stage1.setVisible(true);
+
                 break;
-            case 2: stage2.setVisible(true);
+            case 2:
+                stage2.setVisible(true);
+
                 break;
-            case 3: stage3.setVisible(true);
+            case 3:
+                stage3.setVisible(true);
                 break;
-            case 4: stage4.setVisible(true);
+            case 4:
+                stage4.setVisible(true);
                 break;
-            case 5: stage5.setVisible(true);
+            case 5:
+                stage5.setVisible(true);
                 break;
         }
         //turn
-        switch (gameLogic.getCurrentIndex()){
-            case 1: p1Pane.setDisable(false);break;
-            case 2: p2Pane.setDisable(false);break;
-            case 3: p3Pane.setDisable(false);break;
-            case 4: p4Pane.setDisable(false);break;
+        switch (gameLogic.getCurrentIndex()) {
+            case 1:
+                p1Pane.setDisable(false);
+                break;
+            case 2:
+                p2Pane.setDisable(false);
+                break;
+            case 3:
+                p3Pane.setDisable(false);
+                break;
+            case 4:
+                p4Pane.setDisable(false);
+                break;
         }
+    }
 
-        //
-
+    public void updatePlayerData(Team teamI, GameLogic gameLogicI) {
+        teamI.getPlayers()[gameLogicI.getCurrentIndex()] = gameLogic.getCurrentPlayer();
     }
 
     public void switchToMenu(ActionEvent event) throws IOException {
