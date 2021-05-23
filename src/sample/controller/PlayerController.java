@@ -11,14 +11,14 @@ public class PlayerController {
     public PlayerController(){
 
     }
-    public void setPlayers(String playerName, String playerColor, int playerPoint, int playerTurn, int x, int y){
-        players.add(new Player(playerName,playerColor,playerPoint,playerTurn,x,y));
+    public void setPlayers(String playerUrl, int playerPoint, int playerTurn, int x, int y){
+        players.add(new Player(playerUrl,playerPoint,playerTurn));
     }
     public ArrayList<Player> getPlayers(){return players;}
     public String getOnePlayerName(int playerTurn){
        return players.get(playerTurn).getPlayerName();
     }
-    public Image getOnePlayerColor(int playerTurn){
+    public Image getOneplayerUrl(int playerTurn){
 
         return players.get(playerTurn-1).getPlayerImage();
     }

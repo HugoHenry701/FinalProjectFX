@@ -10,37 +10,38 @@ public class Player {
     private String playerName;
     private UUID playerID;
     private Image playerImage;
+    private String playerUrl;
     private String playerColor;
     private int point;
     private int turn;
-    private int playerX;
-    private int playerY;
 
-    public Player(){
 
-    }
-    public Player(String name,String playerColorI, int p, int t, int x, int y) {
+    public Player(String playerUrlI, int p, int t) {
         playerID = UUID.randomUUID();
-        playerName = name;
-        playerColor = playerColorI;
-        playerImage = new Image("images/PLAYER/"+ getPlayerColor() +".png");
+        playerUrl = playerUrlI;
+        playerImage = new Image("images/PLAYER/"+ getplayerUrl() +".png");
         point = p;
         turn = t;
-        playerX = x;
-        playerY = y;
+
+        switch (getplayerUrl()){
+            case "box0": playerColor = "Blue";break;
+            case "box1": playerColor = "Green";break;
+            case "box2": playerColor = "Red";break;
+            case "box3": playerColor = "Yellow";break;
+        }
     }
 
     //get
     public String getPlayerName() {
         return playerName;
     }
-    public String getPlayerColor(){return playerColor;}
+    public String getplayerUrl(){return playerUrl;}
     public String getPlayerID() {
         return playerID.toString();
     }
 
-//    public String getPlayerColor() {
-//        return playerColor;
+//    public String getplayerUrl() {
+//        return playerUrl;
 //    }
 
     public int getPoint() {
@@ -49,8 +50,8 @@ public class Player {
     public int getTurn(){
         return turn;
     }
-    public int getPlayerX(){return playerX;}
-    public int getPlayerY(){return playerY;}
+
+    public String getPlayerColor(){return playerColor;}
     public Image getPlayerImage(){return playerImage;}
 
     //set
@@ -64,20 +65,20 @@ public class Player {
 //        this.playerNameProperty().set(name);
 //    }
 
-//    public StringProperty playerColorProperty(){
-//        if(playerColor == null){
-//            playerColor = new SimpleStringProperty();
+//    public StringProperty playerUrlProperty(){
+//        if(playerUrl == null){
+//            playerUrl = new SimpleStringProperty();
 //        }
-//        return playerColor;
+//        return playerUrl;
 //    }
-//    public final void setPlayerColor(String color){this.playerColorProperty().set(color);}
+//    public final void setplayerUrl(String color){this.playerUrlProperty().set(color);}
 
     public void setPlayerID(UUID id) {
         playerID = id;
     }
 
-//    public void setPlayerColor(String colorP) {
-//        playerColor = colorP;
+//    public void setplayerUrl(String colorP) {
+//        playerUrl = colorP;
 //    }
     public void setPoint(int p){
         point = p;
@@ -91,9 +92,8 @@ public class Player {
     public void subPoint (int p){
         point -= p;
     }
-    public void setPlayerX (int x){playerX = x;}
-    public void setPlayerY (int y){playerY = y;}
-    public void movePlayer(){playerY++;}
+
+
     public void setPlayerImage(Image playerImage1){playerImage = playerImage1;}
     public void setPlayerName(String name){
         playerName = name;

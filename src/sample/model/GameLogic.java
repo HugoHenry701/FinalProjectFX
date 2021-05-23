@@ -30,11 +30,11 @@ public class GameLogic {
 
     public boolean isValidMove(int colIndex) {
         boolean valid;
-        if (team.getPlayers()[currentIndex].getPlayerColor().equals(boardGame.getBoard()[colIndex][currentStage-1].getColor())){
+        if (team.getPlayers()[currentIndex].getplayerUrl().equals(boardGame.getBoard()[colIndex][currentStage-1].getColor())){
 //            currentStage++;
 //            currentPlayer.addPoint(20);
 //            System.out.println("box:" + boardGame.getBoard()[colIndex][currentStage-1].getColor());
-//            System.out.println("player: " + team.getPlayers()[currentIndex].getPlayerColor());
+//            System.out.println("player: " + team.getPlayers()[currentIndex].getplayerUrl());
 //            System.out.println("valid");
             valid = true;
         } else {
@@ -44,17 +44,17 @@ public class GameLogic {
 //                currentIndex = 1;
 //            }
 //            System.out.println("box:" + boardGame.getBoard()[colIndex][currentStage-1].getColor());
-//            System.out.println("player: " + team.getPlayers()[currentIndex].getPlayerColor());
+//            System.out.println("player: " + team.getPlayers()[currentIndex].getplayerUrl());
 //            System.out.println("invalid");
             valid = false;
         }
         return valid;
     }
 
-    public boolean isWin() {
+    public boolean isWin(int colIndex) {
         boolean winCheck;
-        if ((currentStage == 4) && (currentPlayer.getPlayerImage() == boardGame.getBoard()[boardGame.getCurrentBoxColIndex(currentStage)][currentStage].getBox())) {
-            currentPlayer.addPoint(100);
+        if ((currentStage == 5) && (team.getPlayers()[currentIndex].getplayerUrl().equals(boardGame.getBoard()[colIndex][currentStage-1].getColor()))) {
+
             winCheck = true;
         } else {
             winCheck = false;

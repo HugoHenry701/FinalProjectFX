@@ -108,14 +108,6 @@ public class MenuView implements Initializable {
         System.exit(0);
     }
 
-    public String[] getPlayersName() {
-        String[] playersName = new String[4];
-        playersName[0] = p1name.getText();
-        playersName[1] = p2name.getText();
-        playersName[2] = p3name.getText();
-        playersName[3] = p4name.getText();
-        return playersName;
-    }
 
     public void switchToGamePlay(ActionEvent event) throws IOException {
 
@@ -124,10 +116,16 @@ public class MenuView implements Initializable {
             Parent root2 = loader.load();
             GamePlayController gamePlayController = loader.getController();
             gamePlayController.displayPlayerName(getPlayersName());
+//            gamePlayController.updatePlayersName(getPlayersName());
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root2);
             stage.setScene(scene);
             stage.show();
+//            System.out.println(p1name.getText());
+//            System.out.println(p2name.getText());
+//            System.out.println(p3name.getText());
+//            System.out.println(p4name.getText());
         } else if (!isValidName(p1name.getText())) {
             valid1.setText("Invalid Player Name");
             valid1.setStyle("-fx-text-fill:red");
@@ -148,6 +146,14 @@ public class MenuView implements Initializable {
 
     }
 
+    public String[] getPlayersName() {
+        String[] playersName = new String[4];
+        playersName[0] = p1name.getText();
+        playersName[1] = p2name.getText();
+        playersName[2] = p3name.getText();
+        playersName[3] = p4name.getText();
+        return playersName;
+    }
 
     public void moveSubSceneHelp() {
         TranslateTransition trans = new TranslateTransition();

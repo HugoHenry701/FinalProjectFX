@@ -12,10 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
+import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.scene.image.ImageView;
 
 
-import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -132,14 +134,19 @@ public class GamePlayController implements Initializable {
     TableColumn<Player, Integer> totalPointCol;
 
 
+    @FXML
+    public void init(){
+
+    }
     //Override
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boardGame = new BoardGame(map.getColumnCount(), map.getRowCount(), true);
         team = new Team(map.getColumnCount());
         gameLogic = new GameLogic(boardGame, team, 0, 1, "playGame");
-        updatePlayersName(team);
+
         updateViews();
+
 //        if(gameLogic.getGameStatus() == "endGame"){
 //            endView();
 //            System.out.println("endgame");
@@ -162,9 +169,9 @@ public class GamePlayController implements Initializable {
 //
 //        }
 
-        nextStageBtn.setOnAction(event -> nextStage());
-        nextPlayerBtn.setOnAction(event -> nextPlayer());
-        closeAllBtn.setOnAction(event -> setCloseAllBtn());
+//        nextStageBtn.setOnAction(event -> nextStage());
+//        nextPlayerBtn.setOnAction(event -> nextPlayer());
+//        closeAllBtn.setOnAction(event -> displayPlayerName());
 //            updatePlayerData(team, gameLogic);
 
     }
@@ -173,6 +180,7 @@ public class GamePlayController implements Initializable {
         initPlayers(team.getPlayers());
         initMap(boardGame.getBoard(), gameLogic);
         startGame(gameLogic);
+
     }
 
 
@@ -188,11 +196,12 @@ public class GamePlayController implements Initializable {
         winPlayer.setText(gameLogic.getCurrentPlayer().getPlayerName());
     }
 
-    public void displayPlayerName(String[] playersName) {
-        p1name.setText(playersName[0]);
-        p2name.setText(playersName[1]);
-        p3name.setText(playersName[2]);
-        p4name.setText(playersName[3]);
+    public void displayPlayerName(String[] playersNametemp) {
+        p1name.setText(playersNametemp[0]);
+        p2name.setText(playersNametemp[1]);
+        p3name.setText(playersNametemp[2]);
+        p4name.setText(playersNametemp[3]);
+
     }
 
     public void initMap(BOX[][] mapI, GameLogic gameLogic) {
@@ -258,11 +267,11 @@ public class GamePlayController implements Initializable {
         }
     }
 
-    public void updatePlayersName(Team teamI) {
-        teamI.getPlayers()[0].setPlayerName(p1name.getText());
-        teamI.getPlayers()[1].setPlayerName(p2name.getText());
-        teamI.getPlayers()[2].setPlayerName(p3name.getText());
-        teamI.getPlayers()[3].setPlayerName(p4name.getText());
+    public void updatePlayersName() {
+        team.getPlayers()[0].setPlayerName(p1name.getText());
+        team.getPlayers()[1].setPlayerName(p2name.getText());
+        team.getPlayers()[2].setPlayerName(p3name.getText());
+        team.getPlayers()[3].setPlayerName(p4name.getText());
     }
 
 
@@ -323,7 +332,6 @@ public class GamePlayController implements Initializable {
     public void nextPlayer() {
         gameLogic.nextPlayer();
         gameLogic.setCurrentStage(1);
-        boardGame.closeAllBox();
         map.getChildren().retainAll(map.getChildren().get(0));
         updateViews();
     }
@@ -339,15 +347,39 @@ public class GamePlayController implements Initializable {
         System.out.println("Row" + GridPane.getRowIndex(boxI));
         System.out.println("Col" + GridPane.getColumnIndex(boxI));
 //        System.out.println("box: "+boxI.getColor());
-//        System.out.println("player: "+team.getPlayers()[gameLogicI.getCurrentIndex()].getPlayerColor());
+//        System.out.println("player: "+team.getPlayers()[gameLogicI.getCurrentIndex()].getplayerUrl());
 //        rowIndex = GridPane.getRowIndex(this);
         int colIndex = GridPane.getColumnIndex(boxI);
-        if (gameLogicI.isValidMove(colIndex)) {
+        if(gameLogicI.isWin(colIndex)){
+            updatePlayersName();
+            team.getPlayers()[gameLogicI.getCurrentIndex()].addPoint(100);
+            playGame.setVisible(false);
+            endGame.setVisible(true);
+            winPlayer.setText(team.getPlayers()[gameLogicI.getCurrentIndex()].getPlayerName());
+//            System.out.println(team.getPlayers()[gameLogicI.getCurrentIndex()].getPlayerName());
+            winTable.getColumns().clear();
+            turnCol.setCellValueFactory(new PropertyValueFactory<>("turn"));
+            playerNameCol.setCellValueFactory(new PropertyValueFactory<>("playerName"));
+            colorCol.setCellValueFactory(new PropertyValueFactory<>("playerColor"));
+            totalPointCol.setCellValueFactory(new PropertyValueFactory<>("point"));
+            winTable.getColumns().add(turnCol);
+            winTable.getColumns().add(playerNameCol);
+            winTable.getColumns().add(colorCol);
+            winTable.getColumns().add(totalPointCol);
+            winTable.getItems().addAll(team.getPlayers());
+        }else {
+            if (gameLogicI.isValidMove(colIndex)) {
 //            updateViews();
-            System.out.println("valid");
-        } else {
+                team.getPlayers()[gameLogicI.getCurrentIndex()].addPoint(20);
+                initPlayers(team.getPlayers());
+                System.out.println("valid");
+                nextStage();
+            } else {
 //            updateViews();
-            System.out.println("invalid");
+                System.out.println("invalid");
+                boardGame.closeAllBox();
+                nextPlayer();
+            }
         }
     }
 
