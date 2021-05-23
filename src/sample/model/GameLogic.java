@@ -1,30 +1,43 @@
 package sample.model;
 
 
+import javafx.scene.layout.Pane;
+
 public class GameLogic {
     private BoardGame boardGame;
     private Player[] players;
     private Player currentPlayer;
     private int currentIndex;
     private int currentStage;
+    private String gameStatus;
+    private boolean validMove;
 
-    public GameLogic(BoardGame boardGame1, Player[] players1, int currentI, int currentStageI) {
-        boardGame = boardGame1;
-        players = players1;
-        currentIndex = currentI;
-        currentPlayer = players1[currentIndex];
-        currentStage = currentStageI;
+    public GameLogic() {
+
     }
 
-    public boolean isValidMove() {
+    public GameLogic(BoardGame boardGame1, Player[] players1, int currentI, int currentStageI, String gameStatusI) {
+        boardGame = boardGame1;
+        players = players1;
+        gameStatus = gameStatusI;
+        currentIndex = currentI;
+        currentPlayer = players1[getCurrentIndex()];
+        currentStage = currentStageI;
+
+    }
+
+    public boolean isValidMove(int colIndex) {
         boolean valid;
-        if (currentPlayer.getPlayerImage() == boardGame.getBoard()[boardGame.getColIndex()][boardGame.getRowIndex()].getBox()) {
-            currentPlayer.addPoint(20);
-            currentStage++;
+        if (players[currentIndex].getPlayerColor().equals(boardGame.getBoard()[colIndex][currentStage].getColor()) ) {
+//            currentStage++;
+//            currentPlayer.addPoint(20);
             valid = true;
         } else {
-            currentIndex++;
-            currentStage = 1;
+//            if (currentIndex < 4) {
+//                currentIndex++;
+//            } else {
+//                currentIndex = 1;
+//            }
             valid = false;
         }
         return valid;
@@ -32,7 +45,7 @@ public class GameLogic {
 
     public boolean isWin() {
         boolean winCheck;
-        if ((currentStage == 4) && (currentPlayer.getPlayerImage() == boardGame.getBoard()[boardGame.getColIndex()][boardGame.getRowIndex()].getBox())) {
+        if ((currentStage == 4) && (currentPlayer.getPlayerImage() == boardGame.getBoard()[boardGame.getCurrentBoxColIndex(currentStage)][currentStage].getBox())) {
             currentPlayer.addPoint(100);
             winCheck = true;
         } else {
@@ -43,10 +56,10 @@ public class GameLogic {
 
     //set
     public void nextPlayer() {
-        if (currentIndex < 4) {
+        if (currentIndex < 3) {
             currentIndex++;
         } else {
-            currentIndex = 1;
+            currentIndex = 0;
         }
     }
 
@@ -84,5 +97,11 @@ public class GameLogic {
         return currentStage;
     }
 
+    public String getGameStatus() {
+        return gameStatus;
+    }
 
+    public boolean getValidMove() {
+        return validMove;
+    }
 }

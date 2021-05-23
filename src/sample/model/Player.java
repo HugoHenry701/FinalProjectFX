@@ -23,7 +23,7 @@ public class Player {
         playerID = UUID.randomUUID();
         playerName = name;
         playerColor = playerColorI;
-        playerImage = new Image("images/PLAYER/"+ getPlayerColor()+".png");
+        playerImage = new Image("images/PLAYER/"+ getPlayerColor() +".png");
         point = p;
         turn = t;
         playerX = x;

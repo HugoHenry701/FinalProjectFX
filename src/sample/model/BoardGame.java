@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class BoardGame  {
+public class BoardGame {
     private boolean boardStatus;
     private BOX[][] boxes;
-    private int rowIndex;
-    private int colIndex;
 
 
     public BoardGame(int col, int row, boolean boardBool) {
@@ -23,32 +21,35 @@ public class BoardGame  {
                 }
                 Collections.shuffle(iBox);
                 for (int j = 0; j < boxes.length; j++) {
-                        boxes[j][k] = new BOX("box" + iBox.get(j) + ".png", true);
+                    boxes[j][k] = new BOX("box" + iBox.get(j));
                 }
             }
         }
-        getCurrentBox();
+
     }
-    public void getCurrentBox(){
-        for (int i = 0; i < boxes.length ; i++) {
-            for (int j = 0; j < boxes[i].length ; j++) {
-                if((boxes[i][j].getColIndex() != null)&&(boxes[i][j].getRowIndex() != null)){
-                    rowIndex = boxes[i][j].getRowIndex();
-                    colIndex = boxes[i][j].getColIndex();
-                }
+
+    public int getCurrentBoxColIndex(int currentStage){
+        int colIndex = 0;
+        for (int i = 0; i < boxes.length; i++) {
+            if(boxes[i][currentStage].getBoxStatus()){
+                colIndex = boxes[i][currentStage].getColIndex();
             }
         }
-    }
-
-
-
-    public int getColIndex() {
         return colIndex;
     }
 
-    public int getRowIndex() {
-        return rowIndex;
+    public boolean getClickedBox(int currentStage) {
+        boolean clicked = false;
+        for (int i = 0; i < boxes.length; i++) {
+            if (boxes[i][currentStage].isOpen()) {
+                clicked = false;
+            } else {
+                clicked = true;
+            }
+        }
+        return clicked;
     }
+    
 
 //    public String getBoardName() {
 //        return boardName;

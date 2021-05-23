@@ -29,27 +29,30 @@ public class BOX extends Pane    {
     private int clickCount = 1;
 
 
-    public BOX(String c, boolean bStatus) {
+    public BOX(String c) {
 
         boxColor = c;
-        boxStatus = bStatus;
         boxID = UUID.randomUUID();
-        box = new Image("./resources/images/BOX/" + boxColor);
+        box = new Image("./resources/images/BOX/" + boxColor+".png");
         boxImage = new ImageView(box);
         boxImage.setFitWidth(45);
         boxImage.setFitHeight(45);
         boxImage.setPreserveRatio(true);
-        boxImage.setVisible(boxStatus);
-        setOnMouseClicked(this::handleMouseClick);
+//        setOnMouseClicked(this::handleMouseClick);
         close();
     }
 
     public void handleMouseClick(MouseEvent event) {
-        if(isOpen()||clickCount==0)return;
+        if(isOpen()){
+            boxStatus = true;
+        }
+        else {
+            boxStatus = false;
+        }
         open(() -> {
             rowIndex = GridPane.getRowIndex(this);
             colIndex = GridPane.getColumnIndex(this);
-            clickCount--;
+//            clickCount--;
         });
     }
 
@@ -94,6 +97,7 @@ public class BOX extends Pane    {
     public boolean isOpen() {
         return boxImage.getOpacity() == 1;
     }
+
 
     public void open(Runnable action) {
         FadeTransition ft = new FadeTransition(Duration.seconds(0.5), boxImage);

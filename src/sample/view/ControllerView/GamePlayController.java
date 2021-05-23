@@ -1,5 +1,6 @@
 package sample.view.ControllerView;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 
 
@@ -13,17 +14,22 @@ import javafx.scene.control.*;
 
 import javafx.scene.image.ImageView;
 
-import javafx.scene.layout.Background;
+
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import javafx.stage.Stage;
 
+
+import javafx.util.Duration;
 import sample.model.*;
 
 import java.io.IOException;
 import java.net.URL;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GamePlayController implements Initializable {
@@ -128,25 +134,33 @@ public class GamePlayController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boardGame = new BoardGame(map.getColumnCount(), map.getRowCount(), true);
         team = new Team(map.getColumnCount());
-        gameLogic = new GameLogic(boardGame, team.getPlayers(), 1, 1);
+        gameLogic = new GameLogic(boardGame, team.getPlayers(), 0, 1,"playGame");
         updatePlayersName(team);
-//        if(!gameLogic.isWin()) {
-//            if (gameLogic.isValidMove()) {
-////                gameLogic.nextStage();
-////                gameLogic.addPoint(20);
-//                updateViews();
-//            } else {
-////                gameLogic.nextPlayer();
-////                gameLogic.setCurrentStage(1);
-//                updateViews();
-//            }
-//        }
-//        else{
-//            winnerView();
-//        }
         updateViews();
-        nextStageBtn.setOnAction(event -> nextStage());
-        nextPlayerBtn.setOnAction(event -> nextPlayer());
+//        if(gameLogic.getGameStatus() == "endGame"){
+//            endView();
+//            System.out.println("endgame");
+//        }else if(gameLogic.getGameStatus() == "playGame"){
+//            System.out.println("playgame");
+//            if (boardGame.getClickedBox(gameLogic.getCurrentStage())){
+//                System.out.println("clicked");
+//                if(gameLogic.getValidMove()){
+//                    updateViews();
+//                    System.out.println("valid");
+//                }
+//                else {
+//                    resetView();
+//                    System.out.println("invalid");
+//                }
+//            }else {
+//                updateViews();
+//                System.out.println("not Clicked");
+//            }
+//
+//        }
+
+//        nextStageBtn.setOnAction(event -> nextStage());
+//        nextPlayerBtn.setOnAction(event -> nextPlayer());
 //            updatePlayerData(team, gameLogic);
 
     }
@@ -155,12 +169,17 @@ public class GamePlayController implements Initializable {
         initMap(boardGame.getBoard(), gameLogic);
         startGame(gameLogic);
     }
-    public void winnerView(){
-        playGame.setVisible(false);
-        endGame.setVisible(true);
+    public void updatePlayerData() {
+        initPlayers(team.getPlayers());
+        startGame(gameLogic);
     }
     public void resetView(){
 
+    }
+    public void endView(){
+        playGame.setVisible(false);
+        endGame.setVisible(true);
+        winPlayer.setText(gameLogic.getCurrentPlayer().getPlayerName());
     }
 
     public void displayPlayerName(String[] playersName) {
@@ -173,11 +192,11 @@ public class GamePlayController implements Initializable {
     public void initMap(BOX[][] mapI, GameLogic gameLogic) {
         try {
 
-            for (int i = 0; i < mapI.length; i++) {
-
-                map.add(mapI[i][gameLogic.getCurrentStage() - 1], i, gameLogic.getCurrentStage() - 1, 1, 1);
-                mapI[i][gameLogic.getCurrentStage() - 1].getChildren().add(mapI[i][gameLogic.getCurrentStage() - 1].getBoxImage());
-
+            for (int i=0; i < mapI.length; i++) {
+                BOX currentBox = mapI[i][gameLogic.getCurrentStage()-1];
+                currentBox.getChildren().add(currentBox.getBoxImage());
+                map.add(currentBox, i, gameLogic.getCurrentStage() - 1, 1, 1);
+                mapI[i][gameLogic.getCurrentStage() - 1].setOnMouseClicked(event -> checkMove(gameLogic,currentBox.getBoxImage(),currentBox));
             }
 
         } catch (Exception e) {
@@ -236,7 +255,7 @@ public class GamePlayController implements Initializable {
                 break;
         }
         //turn
-        switch (gameLogic.getCurrentIndex()) {
+        switch (gameLogic.getCurrentIndex()+1) {
             case 1:
                 p1Pane.setDisable(false);
                 p4Pane.setDisable(true);
@@ -256,16 +275,32 @@ public class GamePlayController implements Initializable {
         }
     }
 
-    public void nextStage() {
-        gameLogic.nextStage();
-        updateViews();
-    }
-    public void nextPlayer(){
-        gameLogic.nextPlayer();
-        updateViews();
-    }
-    public void updatePlayerData(Team teamI, GameLogic gameLogicI) {
-        teamI.getPlayers()[gameLogicI.getCurrentIndex()] = gameLogic.getCurrentPlayer();
+//    public void nextStage() {
+//        gameLogic.nextStage();
+//        updateViews();
+//    }
+//    public void nextPlayer(){
+//        gameLogic.nextPlayer();
+//        updatePlayerData();
+//    }
+    public void checkMove(GameLogic gameLogicI, ImageView boxImage,BOX boxI){
+        FadeTransition ft = new FadeTransition(Duration.seconds(0.5), boxImage);
+        ft.setToValue(1);
+        ft.play();
+        System.out.println("Row"+ GridPane.getRowIndex(boxI));
+        System.out.println("Col"+ GridPane.getColumnIndex(boxI));
+        System.out.println("box: "+boxI.getColor());
+        System.out.println("player: "+team.getPlayers()[gameLogicI.getCurrentIndex()].getPlayerColor());
+//        rowIndex = GridPane.getRowIndex(this);
+        int colIndex = GridPane.getColumnIndex(boxI);
+        if(gameLogicI.isValidMove(colIndex)){
+//            updateViews();
+            System.out.println("valid");
+        }
+        else {
+//            resetView();
+            System.out.println("invalid");
+        }
     }
 
     public void switchToMenu(ActionEvent event) throws IOException {
