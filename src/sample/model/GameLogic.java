@@ -3,9 +3,11 @@ package sample.model;
 
 import javafx.scene.layout.Pane;
 
+import java.util.Objects;
+
 public class GameLogic {
     private BoardGame boardGame;
-    private Player[] players;
+    private Team team;
     private Player currentPlayer;
     private int currentIndex;
     private int currentStage;
@@ -16,21 +18,24 @@ public class GameLogic {
 
     }
 
-    public GameLogic(BoardGame boardGame1, Player[] players1, int currentI, int currentStageI, String gameStatusI) {
+    public GameLogic(BoardGame boardGame1, Team teamI, int currentI, int currentStageI, String gameStatusI) {
         boardGame = boardGame1;
-        players = players1;
+        team = teamI;
         gameStatus = gameStatusI;
         currentIndex = currentI;
-        currentPlayer = players1[getCurrentIndex()];
+        currentPlayer = team.getPlayers()[getCurrentIndex()];
         currentStage = currentStageI;
 
     }
 
     public boolean isValidMove(int colIndex) {
         boolean valid;
-        if (players[currentIndex].getPlayerColor().equals(boardGame.getBoard()[colIndex][currentStage].getColor()) ) {
+        if (team.getPlayers()[currentIndex].getPlayerColor().equals(boardGame.getBoard()[colIndex][currentStage-1].getColor())){
 //            currentStage++;
 //            currentPlayer.addPoint(20);
+//            System.out.println("box:" + boardGame.getBoard()[colIndex][currentStage-1].getColor());
+//            System.out.println("player: " + team.getPlayers()[currentIndex].getPlayerColor());
+//            System.out.println("valid");
             valid = true;
         } else {
 //            if (currentIndex < 4) {
@@ -38,6 +43,9 @@ public class GameLogic {
 //            } else {
 //                currentIndex = 1;
 //            }
+//            System.out.println("box:" + boardGame.getBoard()[colIndex][currentStage-1].getColor());
+//            System.out.println("player: " + team.getPlayers()[currentIndex].getPlayerColor());
+//            System.out.println("invalid");
             valid = false;
         }
         return valid;

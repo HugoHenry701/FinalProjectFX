@@ -35,8 +35,8 @@ public class BOX extends Pane    {
         boxID = UUID.randomUUID();
         box = new Image("./resources/images/BOX/" + boxColor+".png");
         boxImage = new ImageView(box);
-        boxImage.setFitWidth(45);
-        boxImage.setFitHeight(45);
+        boxImage.setFitWidth(50);
+        boxImage.setFitHeight(50);
         boxImage.setPreserveRatio(true);
 //        setOnMouseClicked(this::handleMouseClick);
         close();

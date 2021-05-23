@@ -45,11 +45,14 @@ public class GamePlayController implements Initializable {
     Pane playGame;
     @FXML
     Pane endGame;
-    //panePlayGame
+    //test Btn
     @FXML
     Button nextStageBtn;
     @FXML
     Button nextPlayerBtn;
+    @FXML
+    Button closeAllBtn;
+    //panePlayGame
     @FXML
     Label wrongStatus;
     @FXML
@@ -134,7 +137,7 @@ public class GamePlayController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boardGame = new BoardGame(map.getColumnCount(), map.getRowCount(), true);
         team = new Team(map.getColumnCount());
-        gameLogic = new GameLogic(boardGame, team.getPlayers(), 0, 1,"playGame");
+        gameLogic = new GameLogic(boardGame, team, 0, 1, "playGame");
         updatePlayersName(team);
         updateViews();
 //        if(gameLogic.getGameStatus() == "endGame"){
@@ -159,24 +162,27 @@ public class GamePlayController implements Initializable {
 //
 //        }
 
-//        nextStageBtn.setOnAction(event -> nextStage());
-//        nextPlayerBtn.setOnAction(event -> nextPlayer());
+        nextStageBtn.setOnAction(event -> nextStage());
+        nextPlayerBtn.setOnAction(event -> nextPlayer());
+        closeAllBtn.setOnAction(event -> setCloseAllBtn());
 //            updatePlayerData(team, gameLogic);
 
     }
-    public void updateViews(){
+
+    public void updateViews() {
         initPlayers(team.getPlayers());
         initMap(boardGame.getBoard(), gameLogic);
         startGame(gameLogic);
     }
-    public void updatePlayerData() {
-        initPlayers(team.getPlayers());
-        startGame(gameLogic);
-    }
-    public void resetView(){
 
+
+    public void resetView() {
+        if (map.getChildren().removeAll()) {
+
+        }
     }
-    public void endView(){
+
+    public void endView() {
         playGame.setVisible(false);
         endGame.setVisible(true);
         winPlayer.setText(gameLogic.getCurrentPlayer().getPlayerName());
@@ -191,18 +197,48 @@ public class GamePlayController implements Initializable {
 
     public void initMap(BOX[][] mapI, GameLogic gameLogic) {
         try {
+//            if (gameLogic.getCurrentIndex() != 0) {
 
-            for (int i=0; i < mapI.length; i++) {
-                BOX currentBox = mapI[i][gameLogic.getCurrentStage()-1];
-                currentBox.getChildren().add(currentBox.getBoxImage());
-                map.add(currentBox, i, gameLogic.getCurrentStage() - 1, 1, 1);
-                mapI[i][gameLogic.getCurrentStage() - 1].setOnMouseClicked(event -> checkMove(gameLogic,currentBox.getBoxImage(),currentBox));
-            }
+//                List<BOX> addTo = new ArrayList<>();
+//                map.getChildren().clear();
+//                map = new GridPane();
+//                for (int i = 0; i < mapI.length; i++) {
+//                    BOX boxTarget = mapI[i][gameLogic.getCurrentStage() - 1];
+////                    boxTarget.getChildren().add(boxTarget.getBoxImage());
+//                    boxTarget.setOnMouseClicked(event -> checkMove(gameLogic, boxTarget.getBoxImage(), boxTarget));
+//                    addTo.add(boxTarget);
+//                    GridPane.setColumnIndex(boxTarget, i);
+//                    GridPane.setRowIndex(boxTarget, gameLogic.getCurrentStage() - 1);
+//                }
+//                map.getChildren().setAll(addTo);
+//                map.setGridLinesVisible(true);
+//                for (int i = 0; i < mapI.length; i++) {
+//                    Node node = mapI[i][gameLogic.getCurrentStage()-1].getBoxImage();
+//                    map.add(node,i,gameLogic.getCurrentStage()-1,1,1);
+//                }
+//                map = new GridPane();
+//                for (int i = 0; i < mapI.length; i++) {
+//                    BOX currentBox = mapI[i][gameLogic.getCurrentStage() - 1];
+////                    currentBox.getChildren().add(currentBox.getBoxImage());
+//                    currentBox.setOnMouseClicked(event -> checkMove(gameLogic, currentBox.getBoxImage(), currentBox));
+//                    map.add(currentBox, i, gameLogic.getCurrentStage() - 1, 1, 1);
+//
+//                }
+//            } else {
+                for (int i = 0; i < mapI.length; i++) {
+                    BOX currentBox = mapI[i][gameLogic.getCurrentStage() - 1];
+//                    currentBox.getChildren().add(currentBox.getBoxImage());
+                    currentBox.setOnMouseClicked(event -> checkMove(gameLogic, currentBox.getBoxImage(), currentBox));
+                    map.add(currentBox, i, gameLogic.getCurrentStage() - 1, 1, 1);
+                }
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 
     public void initPlayers(Player[] players1) {
         try {
@@ -235,6 +271,9 @@ public class GamePlayController implements Initializable {
         switch (gameLogicI.getCurrentStage()) {
             case 1:
                 stage1.setVisible(true);
+                stage2.setVisible(false);
+                stage3.setVisible(false);
+                stage4.setVisible(false);
                 stage5.setVisible(false);
                 break;
             case 2:
@@ -255,7 +294,7 @@ public class GamePlayController implements Initializable {
                 break;
         }
         //turn
-        switch (gameLogic.getCurrentIndex()+1) {
+        switch (gameLogic.getCurrentIndex() + 1) {
             case 1:
                 p1Pane.setDisable(false);
                 p4Pane.setDisable(true);
@@ -275,30 +314,39 @@ public class GamePlayController implements Initializable {
         }
     }
 
-//    public void nextStage() {
-//        gameLogic.nextStage();
-//        updateViews();
-//    }
-//    public void nextPlayer(){
-//        gameLogic.nextPlayer();
-//        updatePlayerData();
-//    }
-    public void checkMove(GameLogic gameLogicI, ImageView boxImage,BOX boxI){
+    public void nextStage() {
+        gameLogic.nextStage();
+        boardGame.setDisableBoxInStage(gameLogic.getCurrentStage()-1);
+        updateViews();
+    }
+
+    public void nextPlayer() {
+        gameLogic.nextPlayer();
+        gameLogic.setCurrentStage(1);
+        boardGame.closeAllBox();
+        map.getChildren().retainAll(map.getChildren().get(0));
+        updateViews();
+    }
+
+    public void setCloseAllBtn() {
+        boardGame.closeAllBox();
+    }
+
+    public void checkMove(GameLogic gameLogicI, ImageView boxImage, BOX boxI) {
         FadeTransition ft = new FadeTransition(Duration.seconds(0.5), boxImage);
         ft.setToValue(1);
         ft.play();
-        System.out.println("Row"+ GridPane.getRowIndex(boxI));
-        System.out.println("Col"+ GridPane.getColumnIndex(boxI));
-        System.out.println("box: "+boxI.getColor());
-        System.out.println("player: "+team.getPlayers()[gameLogicI.getCurrentIndex()].getPlayerColor());
+        System.out.println("Row" + GridPane.getRowIndex(boxI));
+        System.out.println("Col" + GridPane.getColumnIndex(boxI));
+//        System.out.println("box: "+boxI.getColor());
+//        System.out.println("player: "+team.getPlayers()[gameLogicI.getCurrentIndex()].getPlayerColor());
 //        rowIndex = GridPane.getRowIndex(this);
         int colIndex = GridPane.getColumnIndex(boxI);
-        if(gameLogicI.isValidMove(colIndex)){
+        if (gameLogicI.isValidMove(colIndex)) {
 //            updateViews();
             System.out.println("valid");
-        }
-        else {
-//            resetView();
+        } else {
+//            updateViews();
             System.out.println("invalid");
         }
     }

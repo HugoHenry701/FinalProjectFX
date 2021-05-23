@@ -22,6 +22,7 @@ public class BoardGame {
                 Collections.shuffle(iBox);
                 for (int j = 0; j < boxes.length; j++) {
                     boxes[j][k] = new BOX("box" + iBox.get(j));
+                    boxes[j][k].getChildren().add(boxes[j][k].getBoxImage());
                 }
             }
         }
@@ -49,7 +50,19 @@ public class BoardGame {
         }
         return clicked;
     }
-    
+    public void closeAllBox(){
+        for (int i = 0; i < boxes.length; i++) {
+            for (int j = 0; j < boxes[i].length; j++) {
+                boxes[i][j].close();
+                boxes[i][j].setDisable(false);
+            }
+        }
+    }
+    public void setDisableBoxInStage(int previousStage){
+        for (int i = 0; i < boxes.length; i++) {
+            boxes[i][previousStage-1].setDisable(true);
+        }
+    }
 
 //    public String getBoardName() {
 //        return boardName;
