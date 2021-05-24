@@ -19,7 +19,7 @@ public class Player {
     public Player(String playerUrlI, int p, int t) {
         playerID = UUID.randomUUID();
         playerUrl = playerUrlI;
-        playerImage = new Image("images/PLAYER/"+ getplayerUrl() +".png");
+        playerImage = new Image("/sample/resources/images/PLAYER/"+ getplayerUrl() +".png");
         point = p;
         turn = t;
 

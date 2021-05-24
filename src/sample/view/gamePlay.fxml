@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.ControllerView.GamePlayController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.GamePlayController">
    <children>
       <Pane fx:id="endGame" layoutX="14.0" layoutY="16.0" prefHeight="368.0" prefWidth="571.0" visible="false">
          <children>
@@ -181,18 +181,28 @@
                   </Label>
                </children>
             </GridPane>
-            <Label fx:id="wrongStatus" alignment="CENTER" layoutX="106.0" layoutY="350.0" prefHeight="29.0" prefWidth="197.0" text="WRONG" textFill="RED" visible="false">
-               <font>
-                  <Font name=".VnBahamasBH Bold" size="30.0" />
-               </font>
-            </Label>
-            <Button fx:id="nextStageBtn" layoutX="15.0" layoutY="43.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Next Stage" />
-            <Button fx:id="nextPlayerBtn" layoutX="19.0" layoutY="367.0" mnemonicParsing="false" text="Next Player" />
             <ImageView fitHeight="205.0" fitWidth="71.0" layoutX="169.0" layoutY="-59.0" pickOnBounds="true" rotate="90.0">
                <image>
-                  <Image url="@../../../resources/images/flow.png" />
+                  <Image url="@/images/flow.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="arrowP1" fitHeight="90.0" fitWidth="87.0" layoutX="316.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@/images/coolArrow.png" />
+               </image></ImageView>
+            <ImageView fx:id="arrowP2" fitHeight="90.0" fitWidth="87.0" layoutX="316.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@/images/coolArrow.png" />
+               </image></ImageView>
+            <ImageView fx:id="arrowP3" fitHeight="90.0" fitWidth="87.0" layoutX="316.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@/images/coolArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="arrowP4" fitHeight="90.0" fitWidth="87.0" layoutX="316.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@/images/coolArrow.png" />
+               </image></ImageView>
          </children>
       </Pane>
    </children>

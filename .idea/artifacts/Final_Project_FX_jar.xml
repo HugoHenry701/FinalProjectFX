@@ -1,0 +1,33 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Final Project FX:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Final_Project_FX_jar</output-path>
+    <root id="archive" name="Final Project FX.jar">
+      <element id="module-output" name="Final Project FX" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/javax.inject-1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/src.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/deploy.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/javaws.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/jrt-fs.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/plugin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/java.jnlp.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/ant-javafx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/jdk.deploy.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/jdk.javaws.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/jdk.plugin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-10.0.2/lib/plugin-legacy.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/flow_data/datafx-core-8.0b5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/Data_reader_javafx/jmol-14.31.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/src.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/20.1.0/annotations-20.1.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

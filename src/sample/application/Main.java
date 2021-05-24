@@ -23,7 +23,7 @@ public class Main extends Application {
         this.primaryStage.setTitle("THE LAST PASSENGER");
 
         // Set the application icon
-        this.primaryStage.getIcons().add(new Image("/hkcc_icons/hkcc_tKo_2.ico"));
+        this.primaryStage.getIcons().add(new Image("/images/hkcc.png"));
         this.primaryStage.setResizable(false);
 
         showMainLayout();

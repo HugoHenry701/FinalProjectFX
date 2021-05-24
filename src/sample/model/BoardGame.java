@@ -58,6 +58,14 @@ public class BoardGame {
             }
         }
     }
+    public void closeBoxInStage(int currentStage){
+        for (int i = 0; i < boxes.length; i++) {
+            if (boxes[i][currentStage].isOpen()){
+                boxes[i][currentStage].close();
+            }
+        }
+        System.out.println("closed");
+    }
     public void setDisableBoxInStage(int previousStage){
         for (int i = 0; i < boxes.length; i++) {
             boxes[i][previousStage-1].setDisable(true);

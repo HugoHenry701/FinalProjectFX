@@ -1,0 +1,32 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="The Last Passenger">
+    <output-path>$PROJECT_DIR$/out/artifacts/The_Last_Passenger</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="sample.application.Main" />
+        <option name="description" value="Final Project CS 360" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="icons">
+          <JavaFxApplicationIcons>
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/sample/resources/hkcc_icons/hkcc_tKo_2.ico" />
+          </JavaFxApplicationIcons>
+        </option>
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="The Last Passenger" />
+        <option name="vendor" value="CS360" />
+        <option name="version" value="1.1" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Final_Project_FX.jar">
+        <element id="module-output" name="Final Project FX" />
+      </element>
+      <element id="file-copy" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/20.1.0/annotations-20.1.0.jar" />
+      <element id="library" level="project" name="datafx-core-8.0b5" />
+      <element id="library" level="project" name="javax.inject-1" />
+      <element id="library" level="project" name="jmol-14.31.10" />
+      <element id="library" level="project" name="lib1" />
+      <element id="library" level="project" name="lib2" />
+    </root>
+  </artifact>
+</component>
