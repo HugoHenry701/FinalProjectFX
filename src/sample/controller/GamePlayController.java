@@ -139,18 +139,17 @@ public class GamePlayController implements Initializable {
     TableColumn<Player, Integer> totalPointCol;
 
 
-    @FXML
-    public void init() {
 
-    }
 
     //Override
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Data Field
         boardGame = new BoardGame(map.getColumnCount(), map.getRowCount(), true);
         team = new Team(map.getColumnCount());
         gameLogic = new GameLogic(boardGame, team, 0, 1, "playGame");
-
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/resources/audio/"));
+        //Init & Display View
         updateViews();
 
 //        if(gameLogic.getGameStatus() == "endGame"){
@@ -194,24 +193,13 @@ public class GamePlayController implements Initializable {
     }
 
 
-    public void resetView() {
-        if (map.getChildren().removeAll()) {
 
-        }
-    }
-
-    public void endView() {
-        playGame.setVisible(false);
-        endGame.setVisible(true);
-        winPlayer.setText(gameLogic.getCurrentPlayer().getPlayerName());
-    }
 
     public void displayPlayerName(String[] playersNametemp) {
         p1name.setText(playersNametemp[0]);
         p2name.setText(playersNametemp[1]);
         p3name.setText(playersNametemp[2]);
         p4name.setText(playersNametemp[3]);
-
     }
 
     public void initMap(BOX[][] mapI, GameLogic gameLogic) {
@@ -381,8 +369,8 @@ public class GamePlayController implements Initializable {
         FadeTransition ft = new FadeTransition(Duration.seconds(1), boxImage);
         ft.setToValue(1);
         ft.playFrom(Duration.seconds(0.9));
-        System.out.println("Row" + GridPane.getRowIndex(boxI));
-        System.out.println("Col" + GridPane.getColumnIndex(boxI));
+//        System.out.println("Row" + GridPane.getRowIndex(boxI));
+//        System.out.println("Col" + GridPane.getColumnIndex(boxI));
 //        System.out.println("box: "+boxI.getColor());
 //        System.out.println("player: "+team.getPlayers()[gameLogicI.getCurrentIndex()].getplayerUrl());
 //        rowIndex = GridPane.getRowIndex(this);
@@ -393,7 +381,6 @@ public class GamePlayController implements Initializable {
             playGame.setVisible(false);
             endGame.setVisible(true);
             winPlayer.setText(team.getPlayers()[gameLogicI.getCurrentIndex()].getPlayerName());
-//            System.out.println(team.getPlayers()[gameLogicI.getCurrentIndex()].getPlayerName());
             winTable.getColumns().clear();
             turnCol.setCellValueFactory(new PropertyValueFactory<>("turn"));
             playerNameCol.setCellValueFactory(new PropertyValueFactory<>("playerName"));
@@ -406,13 +393,11 @@ public class GamePlayController implements Initializable {
             winTable.getItems().addAll(team.getPlayers());
         } else {
             if (gameLogicI.isValidMove(colIndex)) {
-//            updateViews();
                 team.getPlayers()[gameLogicI.getCurrentIndex()].addPoint(20);
                 initPlayers(team.getPlayers());
                 System.out.println("valid");
                 nextStage();
             } else {
-//            updateViews();
                 System.out.println("invalid");
                 if (gameLogic.getCurrentStage() == 1) {
                     boardGame.closeAllBox();

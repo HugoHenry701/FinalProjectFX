@@ -37,8 +37,6 @@ import javafx.util.Duration;
 
 
 public class MenuView implements Initializable {
-    private Main mainApp;
-
     private boolean isHidden;
     Font font = Font.font("castellar", 16);
     @FXML
@@ -71,10 +69,7 @@ public class MenuView implements Initializable {
     private AnchorPane subSceneSCore;
 
 
-    public void setMainApp(Main mainApp) {
-        this.mainApp = mainApp;
 
-    }
 
 
     @Override
@@ -100,7 +95,6 @@ public class MenuView implements Initializable {
         scale.setByX(1.5);
         scale.setByY(1.5);
         scale.play();
-
     }
 
 
